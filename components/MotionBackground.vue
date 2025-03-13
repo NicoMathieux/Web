@@ -16,6 +16,9 @@ const PARAMS = {
     color1f: [0.43, 0.35, 0.25],
     color2: { r: 0.93, g: 0.73, b: 0.54 },
     color2f: [0.93, 0.73, 0.54],
+    grainForce: 5,
+    grainSize: 0.1,
+    grainSpeed: 0.5,
 };
 const UIColor = ref<string>("white");
 
@@ -38,6 +41,11 @@ onMounted(() => {
             "Noir": "black"
         }
     });
+    folder.addBlade({ view: 'separator' });
+    folder.addBinding(PARAMS, 'grainForce', { label: "Grain - Force", min: 0, max: 20 } );
+    folder.addBinding(PARAMS, 'grainSize', { label: "Grain - Taille", min: 0.01, max: 1 } );
+    folder.addBinding(PARAMS, 'grainSpeed', { label: "Grain - Vitesse", min: 0, max: 1 } );
+    folder.addBlade({ view: 'separator' });
     folder.addButton({
         title: 'Copier les paramètres',
     }).on('click', () => {
@@ -116,10 +124,9 @@ const initGL = () => {
         uniform vec3 uColor1;
         uniform vec3 uColor2;
         uniform vec4 uParams;
+        uniform vec3 uGrainParams;
 
         varying vec2 vUv;
-
-        const float NOISE_GRANULARITY = 5./255.0;
 
         float random(vec2 coords, float time) {
             return fract(sin(dot(coords.xy, vec2(12.9898,78.233))) * 43758.5453 + time);
@@ -131,6 +138,11 @@ const initGL = () => {
             float uSize = uParams.z;
             float uAlpha = uParams.w;
 
+            float uGrainForce = uGrainParams.x;
+            float uGrainSize = uGrainParams.y;
+            float uGrainSpeed = uGrainParams.z;
+            float NOISE_GRANULARITY = uGrainForce/255.0;
+
             float time = uTime * .00002 * uSpeed;
 
             float fbm1 = (texture2D(tNoise, mod(vUv * uSize * 0.7 - time, 1.)).r);
@@ -139,7 +151,7 @@ const initGL = () => {
             
             float noisedValue = fbm1 * fbm2 * fbm3;
             vec3 mixedColor = mix(uColor1, uColor2, noisedValue * uForce);
-            vec3 ditheredColor = mixedColor + mix(-NOISE_GRANULARITY, NOISE_GRANULARITY, random(vUv, uTime * .0001));
+            vec3 ditheredColor = mixedColor + mix(-NOISE_GRANULARITY, NOISE_GRANULARITY, random(floor(vUv * uGrainSize) / uGrainSize, uTime * .001 * uGrainSpeed));
             
             gl_FragColor = vec4(mix(vec3(0.), ditheredColor, uAlpha), 1.);
         }
@@ -160,6 +172,7 @@ const initGL = () => {
         prg.uColor1(PARAMS.color1f);
         prg.uColor2(PARAMS.color2f);
         prg.uParams(PARAMS.speed, PARAMS.force, PARAMS.size, PARAMS.alpha);
+        prg.uGrainParams(PARAMS.grainForce, 1 / PARAMS.grainSize * 100, PARAMS.grainSpeed);
 
         quad.attribPointer(prg);
         quad.drawTriangles();
