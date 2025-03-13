@@ -8,15 +8,16 @@ import { TweakpaneColor } from "../utils/tweakpane";
 
 const canvas = ref<HTMLCanvasElement | null>(null);
 const PARAMS = {
-    speed: 1,
+    speed: 2.5,
     force: 5,
-    size: 0.1,
+    size: 0.2,
     alpha: 1,
-    color1: { r: 0.06, g: 0.31, b: 0 },
-    color1f: [0.06, 0.31, 0],
-    color2: { r: 1, g: 0.51, b: 0 },
-    color2f: [1, 0.51, 0]
+    color1: { r: 0.43, g: 0.35, b: 0.25 },
+    color1f: [0.43, 0.35, 0.25],
+    color2: { r: 0.93, g: 0.73, b: 0.54 },
+    color2f: [0.93, 0.73, 0.54],
 };
+const UIColor = ref<string>("white");
 
 onMounted(() => {
     const pane = new Pane();
@@ -30,10 +31,17 @@ onMounted(() => {
     folder.addBinding(PARAMS, 'alpha', { label: "Opacité", min: 0, max: 2 } );
     TweakpaneColor(folder, PARAMS, 'color1', 'color1f', { label: "Couleur 1"});
     TweakpaneColor(folder, PARAMS, 'color2', 'color2f', { label: "Couleur 2"});
+    folder.addBinding(UIColor, 'value', {
+        label: "Couleur de texte",
+        options: {
+            "Blanc": "white",
+            "Noir": "black"
+        }
+    });
     folder.addButton({
         title: 'Copier les paramètres',
     }).on('click', () => {
-        navigator.clipboard.writeText(JSON.stringify(PARAMS));
+        navigator.clipboard.writeText(JSON.stringify({ ...PARAMS, uiColor: UIColor.value }));
         alert("✅ Paramètres copiés dans le presse-papier !")
     });
 
@@ -165,7 +173,10 @@ const initGL = () => {
 </script>
 
 <template>
-    <div class="w-full h-full fixed top-0 left-0">
-        <canvas class="w-full h-full" ref="canvas" />
+    <div>
+        <img :src="`/assets/images/ui_${UIColor}.png`" class="absolute z-10 w-full" />
+        <div class="w-full h-full fixed top-0 left-0">
+            <canvas class="w-full h-full" ref="canvas" />
+        </div>
     </div>
 </template>
