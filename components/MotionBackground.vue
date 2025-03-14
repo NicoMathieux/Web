@@ -8,22 +8,22 @@ import { TweakpaneColor } from "../utils/tweakpane";
 
 const canvas = ref<HTMLCanvasElement | null>(null);
 const PARAMS = {
-    speed: 2.5,
+    speed: 2,
     force: 5,
     size: 0.2,
     alpha: 1,
-    color1: { r: 0.43, g: 0.35, b: 0.25 },
-    color1f: [0.43, 0.35, 0.25],
-    color2: { r: 0.93, g: 0.73, b: 0.54 },
-    color2f: [0.93, 0.73, 0.54],
+    color1: { r: 0.35, g: 0.27, b: 0.18 },
+    color1f: [0.35, 0.27, 0.18],
+    color2: { r: 0.9, g: 0.66, b: 0.42 },
+    color2f: [0.9, 0.66, 0.42],
     grainForce: 5,
     grainSize: 0.1,
-    grainSpeed: 0.5,
+    grainSpeed: 0,
 };
 const UIColor = ref<string>("white");
 
 onMounted(() => {
-    const pane = new Pane();
+    /* const pane = new Pane();
     const folder = pane.addFolder({
         title: 'Options du fond',
         expanded: false
@@ -51,7 +51,7 @@ onMounted(() => {
     }).on('click', () => {
         navigator.clipboard.writeText(JSON.stringify({ ...PARAMS, uiColor: UIColor.value }));
         alert("✅ Paramètres copiés dans le presse-papier !")
-    });
+    }); */
 
     initGL();
 })
