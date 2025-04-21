@@ -1,0 +1,79 @@
+{
+  "format": "page",
+  "id": "consulting",
+  "label": "Consulting",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "double_image_link": {
+              "type": "SharedSlice"
+            },
+            "two_images": {
+              "type": "SharedSlice"
+            },
+            "image_carousel_link": {
+              "type": "SharedSlice"
+            },
+            "title_text_image": {
+              "type": "SharedSlice"
+            },
+            "image_carousel": {
+              "type": "SharedSlice"
+            },
+            "links_list": {
+              "type": "SharedSlice"
+            },
+            "double_cards": {
+              "type": "SharedSlice"
+            },
+            "youtube_video": {
+              "type": "SharedSlice"
+            },
+            "full_width_text": {
+              "type": "SharedSlice"
+            },
+            "numbers_list": {
+              "type": "SharedSlice"
+            },
+            "full_width_button": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
+      }
+    }
+  }
+}

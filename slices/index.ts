@@ -4,5 +4,27 @@ import { defineAsyncComponent } from "vue";
 import { defineSliceZoneComponents } from "@prismicio/vue";
 
 export const components = defineSliceZoneComponents({
-  test: defineAsyncComponent(() => import("./Test/index.vue")),
+  double_cards: defineAsyncComponent(() => import("./DoubleCards/index.vue")),
+  double_image_link: defineAsyncComponent(
+    () => import("./TitleImageLink/index.vue"),
+  ),
+  full_width_button: defineAsyncComponent(
+    () => import("./FullWidthButton/index.vue"),
+  ),
+  full_width_text: defineAsyncComponent(
+    () => import("./FullWidthText/index.vue"),
+  ),
+  image_carousel: defineAsyncComponent(
+    () => import("./ImageCarousel/index.vue"),
+  ),
+  image_carousel_link: defineAsyncComponent(
+    () => import("./ImageCarouselLink/index.vue"),
+  ),
+  links_list: defineAsyncComponent(() => import("./LinksList/index.vue")),
+  numbers_list: defineAsyncComponent(() => import("./NumbersList/index.vue")),
+  title_text_image: defineAsyncComponent(
+    () => import("./TitleTextImage/index.vue"),
+  ),
+  two_images: defineAsyncComponent(() => import("./TwoImages/index.vue")),
+  youtube_video: defineAsyncComponent(() => import("./YoutubeVideo/index.vue")),
 });

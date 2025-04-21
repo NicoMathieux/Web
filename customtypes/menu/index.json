@@ -1,0 +1,57 @@
+{
+  "format": "custom",
+  "id": "menu",
+  "label": "Menu",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "show_cart": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher le panier",
+          "placeholder_false": "Non",
+          "placeholder_true": "Oui",
+          "default_value": true
+        }
+      },
+      "show_contact": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher le \"Contact\"",
+          "placeholder_false": "Non",
+          "placeholder_true": "Oui",
+          "default_value": true
+        }
+      },
+      "show_social_medias": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher les réseaux sociaux",
+          "placeholder_false": "Non",
+          "placeholder_true": "Oui",
+          "default_value": true
+        }
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "links": {
+        "type": "Link",
+        "config": {
+          "label": "Liens",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": true
+        }
+      }
+    }
+  }
+}

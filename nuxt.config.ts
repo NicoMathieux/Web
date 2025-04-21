@@ -6,14 +6,50 @@ const rem = (px: number) => (px ? `${(px / 16).toFixed(7)}rem` : "0rem");
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ["@nuxtjs/prismic", "@nuxtjs/tailwindcss"],
+  modules: ["@nuxtjs/prismic", "@nuxtjs/tailwindcss", "vue3-carousel-nuxt"],
 
   css: [
     '~/styles/global.css',
   ],
 
   prismic: {
-    endpoint: apiEndpoint || repositoryName
+    endpoint: apiEndpoint || repositoryName,
+    clientConfig: {
+      routes: [
+        // {
+        //   type: 'page',
+        //   path: '/:uid',
+        // },
+        {
+          type: 'consulting',
+          path: '/consulting',
+        },
+        {
+          type: 'contact',
+          path: '/contact',
+        },
+        {
+          type: 'expedition',
+          path: '/expedition/:uid',
+        },
+        {
+          type: 'expeditions',
+          path: '/expeditions',
+        },
+        {
+          type: 'shop',
+          path: '/boutique',
+        },
+        {
+          type: 'product',
+          path: '/boutique/:uid',
+        },
+        {
+          type: 'home',
+          path: '/',
+        },
+      ]
+    }
   },
 
   tailwindcss: {
@@ -23,11 +59,12 @@ export default defineNuxtConfig({
         './slices/**/*.{js,ts,vue}'
       ],
       theme: {
-        // fontFamily: {
-        //   sans: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-        //   selfish: ['Selfish', 'ui-serif'],
-        //   helvetica: ['Helvetica Neue', 'ui-sans-serif'],
-        // },
+        fontFamily: {
+          sans: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+          vermin: ['Vermin', 'ui-sans-serif'],
+          slussen: ['Slussen', 'ui-sans-serif'],
+          rader: ['Rader', 'ui-sans-serif'],
+        },
         spacing: {
           xs: rem(25),
           s: rem(75),
@@ -37,18 +74,8 @@ export default defineNuxtConfig({
           '2xl': rem(300),
           '3xl': rem(400),
           0: 0,
-          2: rem(2),
-          4: rem(4),
-          6: rem(6),
-          8: rem(8),
-          16: rem(16),
-          24: rem(24),
-          32: rem(32),
-          45: rem(45),
-          64: rem(64),
-          100: rem(100),
-          128: rem(128),
-          200: rem(200),
+          12: rem(12),
+          60: rem(60),
         },
         boxShadow: {
           'l': '0 4px 16px rgba(0, 0, 0, 0.15)',
@@ -61,6 +88,20 @@ export default defineNuxtConfig({
           '3xl': '1.5rem',
           '4xl': '3rem',
           'full': '9999px',
+        },
+        fontSize: {
+          '2xs': rem(14),
+          xs: rem(16),
+          s: rem(18),
+          m: rem(20),
+          l: rem(32),
+          xl: rem(48),
+          '2xl': rem(224)
+        },
+        colors: {
+          snow: "#FFFFFF",
+          coal: "#242424",
+          forest: "#3A441E"
         }
       },
     }

@@ -20,7 +20,6 @@ const PARAMS = {
     grainSize: 0.1,
     grainSpeed: 0,
 };
-const UIColor = ref<string>("white");
 
 onMounted(() => {
     /* const pane = new Pane();
@@ -34,13 +33,6 @@ onMounted(() => {
     folder.addBinding(PARAMS, 'alpha', { label: "Opacité", min: 0, max: 2 } );
     TweakpaneColor(folder, PARAMS, 'color1', 'color1f', { label: "Couleur 1"});
     TweakpaneColor(folder, PARAMS, 'color2', 'color2f', { label: "Couleur 2"});
-    folder.addBinding(UIColor, 'value', {
-        label: "Couleur de texte",
-        options: {
-            "Blanc": "white",
-            "Noir": "black"
-        }
-    });
     folder.addBlade({ view: 'separator' });
     folder.addBinding(PARAMS, 'grainForce', { label: "Grain - Force", min: 0, max: 20 } );
     folder.addBinding(PARAMS, 'grainSize', { label: "Grain - Taille", min: 0.01, max: 1 } );
@@ -187,8 +179,7 @@ const initGL = () => {
 
 <template>
     <div>
-        <img :src="`/assets/images/ui_${UIColor}.png`" class="absolute z-10 w-full" />
-        <div class="w-full h-full fixed top-0 left-0">
+        <div class="w-full h-full fixed top-0 left-0 -z-10">
             <canvas class="w-full h-full" ref="canvas" />
         </div>
     </div>

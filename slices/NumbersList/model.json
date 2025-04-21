@@ -1,0 +1,49 @@
+{
+  "id": "numbers_list",
+  "type": "SharedSlice",
+  "name": "NumbersList",
+  "description": "NumbersList",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "numbers": {
+          "type": "Group",
+          "config": {
+            "label": "Nombres",
+            "repeat": true,
+            "fields": {
+              "number": {
+                "type": "Text",
+                "config": {
+                  "label": "Nombre",
+                  "placeholder": ""
+                }
+              },
+              "unit": {
+                "type": "Text",
+                "config": {
+                  "label": "Unité",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "Text",
+                "config": {
+                  "label": "Description",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

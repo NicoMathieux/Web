@@ -1,0 +1,54 @@
+{
+  "format": "custom",
+  "id": "footer",
+  "label": "Footer",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "show_social_medias": {
+        "type": "Boolean",
+        "config": {
+          "label": "Afficher les réseaux sociaux",
+          "placeholder_false": "Non",
+          "placeholder_true": "Oui",
+          "default_value": true
+        }
+      },
+      "copyright": {
+        "type": "Text",
+        "config": {
+          "label": "Copyright",
+          "placeholder": ""
+        }
+      },
+      "columns": {
+        "type": "Group",
+        "config": {
+          "label": "Colonnes",
+          "repeat": true,
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": {
+                "label": "Titre",
+                "placeholder": ""
+              }
+            },
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Lien",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
