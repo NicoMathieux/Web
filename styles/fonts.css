@@ -6,7 +6,7 @@
 }
 @font-face {
     font-family: "Slussen";
-    src: url("/assets/fonts/slussen/thin.ttf") format("truetype");
+    src: url("/assets/fonts/slussen/light.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
 }

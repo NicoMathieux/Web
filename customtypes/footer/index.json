@@ -35,10 +35,10 @@
                 "placeholder": ""
               }
             },
-            "link": {
+            "links": {
               "type": "Link",
               "config": {
-                "label": "Lien",
+                "label": "Liens",
                 "placeholder": "",
                 "select": null,
                 "allowTargetBlank": true,

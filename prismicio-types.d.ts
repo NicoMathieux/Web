@@ -384,14 +384,14 @@ export interface FooterDocumentDataColumnsItem {
   title: prismic.KeyTextField;
 
   /**
-   * Lien field in *Footer → Colonnes*
+   * Liens field in *Footer → Colonnes*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: footer.columns[].link
+   * - **API ID Path**: footer.columns[].links
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  link: prismic.Repeatable<
+  links: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
 }
