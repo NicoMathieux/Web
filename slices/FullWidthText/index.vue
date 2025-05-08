@@ -17,6 +17,6 @@ defineProps(
     :data-slice-variation="slice.variation"
   >
     <div class="font-slussen mb-12">{{ slice.primary.title }}</div>
-    <div class="font-rader text-xl w-[80%]"><PrismicRichText :field="slice.primary.text" /></div>
+    <div class="font-rader text-xl w-[80%]"><RichText :field="slice.primary.text" /></div>
   </section>
 </template>

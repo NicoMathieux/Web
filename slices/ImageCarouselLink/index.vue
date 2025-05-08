@@ -76,7 +76,7 @@ const nextSlide = () => {
     <div class="flex justify-between items-start mt-[24px]">
       <div class="w-[400px]">
         <div class="font-rader text-m">{{ title }}</div>
-        <div class="font-slussen mt-[12px]"><PrismicRichText :field="text" /></div>
+        <div class="font-slussen mt-[12px]"><RichText :field="text" /></div>
         <div class="mt-[18px]"><CustomButton :link="link" /></div>
       </div>
       <div class="flex gap-[16px]">

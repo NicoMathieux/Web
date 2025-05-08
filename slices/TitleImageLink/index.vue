@@ -32,7 +32,7 @@ defineProps(
         <CustomImage :image="slice.primary.image" class="w-2/3" />
         <div>
           <div class="font-rader text-m">{{ slice.primary.image_title }}</div>
-          <div class="font-slussen mt-[12px]"><PrismicRichText :field="slice.primary.text" /></div>
+          <div class="font-slussen mt-[12px]"><RichText :field="slice.primary.text" /></div>
           <div class="mt-[18px]"><CustomButton :link="slice.primary.link" /></div>
         </div>
       </div>
@@ -44,7 +44,7 @@ defineProps(
           :date="slice.primary.left[0].image_date"
         />
         <div class="font-rader text-m mt-[24px]">{{ slice.primary.left[0].title }}</div>
-        <div class="font-slussen mt-[12px]"><PrismicRichText :field="slice.primary.left[0].text" /></div>
+        <div class="font-slussen mt-[12px]"><RichText :field="slice.primary.left[0].text" /></div>
         <div class="mt-[18px]"><CustomButton :link="slice.primary.left[0].link" /></div>
       </div>
 
@@ -52,7 +52,7 @@ defineProps(
       <div v-if="slice.primary.center">
         <CustomImage :image="slice.primary.center[0].image" />
         <div class="font-rader text-m mt-[24px]">{{ slice.primary.center[0].title }}</div>
-        <div class="font-slussen mt-[12px]"><PrismicRichText :field="slice.primary.center[0].text" /></div>
+        <div class="font-slussen mt-[12px]"><RichText :field="slice.primary.center[0].text" /></div>
         <div class="mt-[18px]"><CustomButton :link="slice.primary.center[0].link" /></div>
       </div>
 
@@ -63,7 +63,7 @@ defineProps(
           :date="slice.primary.right[0].image_date"
         />
         <div class="font-rader text-m mt-[24px]">{{ slice.primary.right[0].title }}</div>
-        <div class="font-slussen mt-[12px]"><PrismicRichText :field="slice.primary.right[0].text" /></div>
+        <div class="font-slussen mt-[12px]"><RichText :field="slice.primary.right[0].text" /></div>
         <div class="mt-[18px]"><CustomButton :link="slice.primary.right[0].link" /></div>
       </div>
     </div>
