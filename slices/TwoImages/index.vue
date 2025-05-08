@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { Content } from "@prismicio/client";
 
-// The array passed to `getSliceComponentProps` is purely optional.
-// Consider it as a visual hint for you when templating your slice.
 defineProps(
   getSliceComponentProps<Content.TwoImagesSlice>([
     "slice",
@@ -18,7 +16,16 @@ defineProps(
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
   >
-    Placeholder component for two_images (variation: {{ slice.variation }})
-    Slices
+    <div class="flex justify-between gap-[24px]">
+      <CustomImage :image="slice.primary.left_image" />
+      <CustomImage :image="slice.primary.right_image" />
+    </div>
   </section>
 </template>
+
+<style scoped>
+.custom-image {
+  width: 100%;
+  height: 650px;
+}
+</style>
