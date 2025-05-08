@@ -22,14 +22,13 @@ const page = getPrismicSingle("home");
 
 <template>
   <div v-if="page">
-    <div class="px-60">
+    <div>
       <SliceZone
         wrapper="main"
-        class=" flex flex-col gap-[132px] py-[132px]"
+        class=" flex flex-col gap-[132px]"
         :slices="page.data.slices ?? []"
         :components="components"
       />
     </div>
-    <MotionBackground />
   </div>
 </template>
