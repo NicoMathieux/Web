@@ -11,6 +11,12 @@
     font-style: normal;
 }
 @font-face {
+    font-family: "Slussen";
+    src: url("/assets/fonts/slussen/medium.ttf") format("truetype");
+    font-weight: 600;
+    font-style: bold;
+}
+@font-face {
     font-family: "Rader";
     src: url("/assets/fonts/rader/bold.ttf") format("truetype");
     font-weight: 600;
@@ -22,7 +28,7 @@
 }
 
 .font-rader {
-    @apply uppercase leading-[120%];
+    @apply uppercase;
 }
 
 .font-vermin {

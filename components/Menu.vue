@@ -39,7 +39,7 @@ const updateHeight = () => {
         </div>
         <div v-show="opened" class="px-[24px] pt-[30px] pb-[48px]">
             <div class="flex justify-between">
-                <div ref="linksList" class="font-rader text-xl flex flex-col gap-[24px] h-full overflow-auto">
+                <div ref="linksList" class="font-rader leading-[120%] text-xl flex flex-col gap-[24px] h-full overflow-auto">
                     <div v-for="link in menu.data.links"><PrismicLink :field="link" /></div>
                 </div>
                 <PrismicImage :field="menu.data.image" :style="{ height: linksListHeight + 'px' }" />

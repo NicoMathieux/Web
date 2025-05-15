@@ -19,7 +19,7 @@ const params = getPrismicSingle("settings");
                 </div>
             </div>
             <div v-for="column in footer.data.columns" class="w-[200px]">
-                <span class="font-rader text-m">{{ column.title }}</span>
+                <span class="font-rader leading-[90%] text-m ">{{ column.title }}</span>
                 <div class="font-slussen flex flex-col gap-[10px] mt-[24px]">
                     <div v-for="link in column.links"><PrismicLink :field="link" /></div>
                 </div>

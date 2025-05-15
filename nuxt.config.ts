@@ -6,7 +6,11 @@ const rem = (px: number) => (px ? `${(px / 16).toFixed(7)}rem` : "0rem");
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ["@nuxtjs/prismic", "@nuxtjs/tailwindcss", "vue3-carousel-nuxt"],
+  modules: ["@nuxtjs/prismic", "@nuxtjs/tailwindcss", "vue3-carousel-nuxt", "nuxt-mapbox"],
+
+  mapbox: {
+    accessToken: 'pk.eyJ1IjoiZXZhbm1hcnRpaW4iLCJhIjoiY21hcGZqbWl0MGZ5eTJqcXRxd244NXBmbiJ9.kMMXB_B33VtEUTD3aGUvzA'
+  },
 
   css: [
     '~/styles/global.css',
@@ -99,9 +103,9 @@ export default defineNuxtConfig({
           '2xl': rem(224)
         },
         colors: {
+          forest: "#3A441E",
           snow: "#FFFFFF",
           coal: "#242424",
-          forest: "#3A441E"
         }
       },
     }

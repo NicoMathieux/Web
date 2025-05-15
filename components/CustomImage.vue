@@ -11,10 +11,7 @@ defineProps<{
 <template>
     <div :style="{ width, height }" class="relative custom-image overflow-hidden">
         <PrismicImage :field="image" class="object-cover w-full h-full" />
-        <div v-if="place && date" class="font-slussen m-[24px] opacity-75 absolute top-0 left-0">
-            <div>*{{ place }}</div>
-            <div>{{ formatDate(date) }}</div>
-        </div>
+        <ImageDetails v-if="place && date" :place :date />
         <div v-else class="corners-container absolute w-full h-full top-0 left-0 p-[24px] flex flex-col justify-between pointer-events-none">
             <div>
                 <div class="tl"></div>
