@@ -16,7 +16,7 @@ defineProps(
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
   >
-    <div class="font-slussen mb-12">{{ slice.primary.title }}</div>
-    <div class="font-rader leading-[120%] text-xl w-[80%]"><RichText :field="slice.primary.text" /></div>
+    <div v-if="slice.primary.title" class="font-slussen mb-12">{{ slice.primary.title }}</div>
+    <div class="font-rader leading-[50px] text-xl w-[80%]"><RichText :field="slice.primary.text" /></div>
   </section>
 </template>
