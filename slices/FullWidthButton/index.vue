@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { Content } from "@prismicio/client";
 
-// The array passed to `getSliceComponentProps` is purely optional.
-// Consider it as a visual hint for you when templating your slice.
 defineProps(
   getSliceComponentProps<Content.FullWidthButtonSlice>([
     "slice",
@@ -17,8 +15,9 @@ defineProps(
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
+    class="w-full bg-forest px-[60px] py-[48px] flex justify-between items-center"
   >
-    Placeholder component for full_width_button (variation:
-    {{ slice.variation }}) Slices
+    <div class="font-rader text-xl w-[350px] leading-[110%]">{{ slice.primary.text }}</div>
+    <CustomButton :link="slice.primary.link" :revertColors="true" :withArrow="true" />
   </section>
 </template>
