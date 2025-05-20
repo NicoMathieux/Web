@@ -25,7 +25,7 @@ defineProps(
         <div class="font-slussen"><RichText :field="slice.primary.left[0].text" /></div>
       </div>
       <div class="flex flex-col gap-[24px]">
-        <Header :title="slice.primary.left[0].title" :subtitle="slice.primary.left[0].subtitle" :withoutMarginBottom="true" />
+        <Header :title="slice.primary.right[0].title" :subtitle="slice.primary.right[0].subtitle" :withoutMarginBottom="true" />
         <CustomImage class="h-[400px]" :image="slice.primary.right[0].image" />
         <div class="font-slussen"><RichText :field="slice.primary.right[0].text" /></div>
       </div>
