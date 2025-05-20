@@ -46,15 +46,7 @@ const nextSlide = () => {
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
   >
-    <div
-      class="flex items-center justify-between border-b border-snow/50 pb-[12px] mb-[24px]"
-    >
-      <div class="font-vermin text-s">{{ slice.primary.title }}</div>
-      <div class="flex gap-[4px] items-center">
-        <span class="font-slussen">{{ slice.primary.subtitle }}</span>
-        <div class="w-[11px] h-[11px] bg-snow rounded-full"></div>
-      </div>
-    </div>
+    <Header :title="slice.primary.title" :subtitle="slice.primary.subtitle" />
 
     <Carousel
       ref="carousel"
