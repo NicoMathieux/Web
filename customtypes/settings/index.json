@@ -41,7 +41,7 @@
                 "label": "Lien",
                 "placeholder": "",
                 "select": null,
-                "allowTargetBlank": false,
+                "allowTargetBlank": true,
                 "allowText": false,
                 "repeat": false
               }
