@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Content } from "@prismicio/client";
 
-defineProps(
+const props = defineProps(
   getSliceComponentProps<Content.TwoImagesSlice>([
     "slice",
     "index",
@@ -9,6 +9,8 @@ defineProps(
     "context",
   ]),
 );
+
+const withText = ref(props.slice.variation === "withText");
 </script>
 
 <template>
@@ -16,9 +18,19 @@ defineProps(
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
   >
-    <div class="flex justify-between gap-[24px]">
+    <div v-if="!withText" class="grid grid-cols-2 gap-[24px]">
       <CustomImage :image="slice.primary.left_image" />
       <CustomImage :image="slice.primary.right_image" />
+    </div>
+    <div v-else class="grid grid-cols-2 gap-[24px]">
+      <div class="flex flex-col gap-[24px]">
+        <CustomImage :image="slice.primary.left[0].image" />
+        <RichText class="font-slussen" :field="slice.primary.left[0].text" />
+      </div>
+      <div class="flex flex-col gap-[24px]">
+        <CustomImage :image="slice.primary.right[0].image" />
+        <RichText class="font-slussen" :field="slice.primary.right[0].text" />
+      </div>
     </div>
   </section>
 </template>
