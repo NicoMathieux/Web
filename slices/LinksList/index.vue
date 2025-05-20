@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { Content } from "@prismicio/client";
 
-// The array passed to `getSliceComponentProps` is purely optional.
-// Consider it as a visual hint for you when templating your slice.
 defineProps(
   getSliceComponentProps<Content.LinksListSlice>([
     "slice",
@@ -18,7 +16,13 @@ defineProps(
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
   >
-    Placeholder component for links_list (variation: {{ slice.variation }})
-    Slices
+    <Header :title="slice.primary.title" :subtitle="slice.primary.subtitle" />
+
+    <div>
+      <div v-for="link in slice.primary.links" class="flex justify-between items-end border-b border-snow/50 py-[24px]">
+        <PrismicLink :field="link.link" class="font-rader text-xl leading-[80%]" />
+        <span class="font-slussen">{{ link.subtitle }}</span>
+      </div>
+    </div>
   </section>
 </template>
