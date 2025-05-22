@@ -452,6 +452,7 @@ export type FooterDocument<Lang extends string = string> =
   >;
 
 type HomeDocumentDataSlicesSlice =
+  | HeroSlice
   | DoubleImageLinkSlice
   | ImageCarouselLinkSlice
   | TwoImagesSlice
@@ -1570,6 +1571,58 @@ export type FullWidthTextSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Hero → Default → Primary*
+ */
+export interface HeroSliceDefaultPrimary {
+  /**
+   * Image de fond field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.background_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  background_image: prismic.ImageField<never>;
+
+  /**
+   * Image floue field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.blurred_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  blurred_image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Hero Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeroSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeroSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Hero*
+ */
+type HeroSliceVariation = HeroSliceDefault;
+
+/**
+ * Hero Shared Slice
+ *
+ * - **API ID**: `hero`
+ * - **Description**: Hero
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
  * Item in *ImageCarousel → Default → Primary → Images*
  */
 export interface ImageCarouselSliceDefaultPrimaryImagesItem {
@@ -2433,6 +2486,10 @@ declare module "@prismicio/client" {
       FullWidthTextSliceDefaultPrimary,
       FullWidthTextSliceVariation,
       FullWidthTextSliceDefault,
+      HeroSlice,
+      HeroSliceDefaultPrimary,
+      HeroSliceVariation,
+      HeroSliceDefault,
       ImageCarouselSlice,
       ImageCarouselSliceDefaultPrimaryImagesItem,
       ImageCarouselSliceDefaultPrimary,

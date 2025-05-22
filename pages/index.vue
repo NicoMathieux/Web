@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { components } from '~/slices'
+import { components } from "~/slices";
 
 const page = getPrismicSingle("home");
 
@@ -21,14 +21,14 @@ const page = getPrismicSingle("home");
 </script>
 
 <template>
-  <div v-if="page">
-    <div>
-      <SliceZone
-        wrapper="main"
-        class=" flex flex-col gap-[132px]"
-        :slices="page.data.slices ?? []"
-        :components="components"
-      />
-    </div>
-  </div>
+	<div v-if="page">
+		<div>
+			<SliceZone
+				wrapper="main"
+				class="flex flex-col gap-[132px]"
+				:slices="page.data.slices ?? []"
+				:components="components"
+			/>
+		</div>
+	</div>
 </template>

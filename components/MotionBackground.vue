@@ -44,7 +44,7 @@ onMounted(() => {
         navigator.clipboard.writeText(JSON.stringify({ ...PARAMS, uiColor: UIColor.value }));
         alert("✅ Paramètres copiés dans le presse-papier !")
     }); */
-
+    
     initGL();
 })
 

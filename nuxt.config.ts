@@ -100,7 +100,8 @@ export default defineNuxtConfig({
           m: rem(20),
           l: rem(32),
           xl: rem(48),
-          '2xl': rem(224)
+          '2xl': rem(90),
+          '3xl': rem(224)
         },
         colors: {
           forest: "#3A441E",

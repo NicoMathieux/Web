@@ -14,6 +14,7 @@ export const components = defineSliceZoneComponents({
   full_width_text: defineAsyncComponent(
     () => import("./FullWidthText/index.vue"),
   ),
+  hero: defineAsyncComponent(() => import("./Hero/index.vue")),
   image_carousel: defineAsyncComponent(
     () => import("./ImageCarousel/index.vue"),
   ),
