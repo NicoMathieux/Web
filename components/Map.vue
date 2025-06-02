@@ -27,6 +27,8 @@ const bounds = ref();
 const endpoints = ref();
 const mapRef = useMapboxRef("mapRef");
 
+const { isMobile } = useDevice();
+
 const onLoad = () => {
 	mapRef.value.loadImage("/assets/images/gpx-start.png", (error, image) => {
 		if (error) throw error;
@@ -51,7 +53,7 @@ onMounted(async () => {
 	bounds.value = getBounds(geo);
 
 	mapRef.value.fitBounds(bounds.value, {
-		padding: { top: 50, bottom: 80, left: 50, right: 50 }
+		padding: { top: 50, bottom: isMobile ? 100 : 80, left: 50, right: 50 }
 	});
 
 	const ends = getEndpoints(geo);
@@ -137,12 +139,10 @@ const enableInteraction = () => {
     mapRef.value.touchPitch.enable()
     mapRef.value.touchZoomRotate.enable()
 }
-
-const { isMobile } = useDevice();
 </script>
 
 <template>
-	<div class="h-[470px] lg:h-[670px] overflow-hidden relative">
+	<div class="h-[450px] lg:h-[670px] overflow-hidden relative">
 		<ImageDetails :place :date />
 		<MapboxMap
 			map-id="mapRef"
