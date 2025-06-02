@@ -37,8 +37,8 @@ const nextSlide = () => {
   >
     <Header :title="slice.primary.title" :subtitle="slice.primary.subtitle" />
 
-    <div class="grid grid-cols-5">
-      <div class="col-span-2">
+    <div class="flex flex-col-reverse lg:grid lg:grid-cols-5">
+      <div class="col-span-2 mt-[24px] lg:mt-[0px]">
         <div class="font-slussen"><RichText :field="slice.primary.text" /></div>
         <div class="mt-[18px]"><CustomButton :link="slice.primary.link" /></div>
       </div>
@@ -76,5 +76,7 @@ const nextSlide = () => {
 .custom-image {
   height: 600px;
   width: 100%;
+
+  @apply h-[300px] lg:h-[600px];
 }
 </style>

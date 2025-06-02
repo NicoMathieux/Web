@@ -19,7 +19,7 @@ const page = getPrismicReusable("expedition", route.params.uid as string);
     <Map :place="page.data.place" :date="page.data.date" :gpx="page.data.gpx_file.url" />
     <SliceZone
       wrapper="main"
-      class=" flex flex-col gap-[132px] mt-[66px]"
+      class=" flex flex-col gap-[96px] lg:gap-[132px] mt-[66px]"
       :slices="page.data.slices ?? []"
       :components="components"
     />

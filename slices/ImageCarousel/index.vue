@@ -61,6 +61,7 @@ const nextSlide = () => {
 <style scoped>
 .custom-image {
   width: 100%;
-  height: 650px;
+
+  @apply h-[400px] lg:h-[650px];
 }
 </style>

@@ -23,7 +23,8 @@ defineProps(
 <style>
 .youtube-video > iframe {
   width: 100vw;
-  transform: translateX(-60px);
   height: calc(100vw * 9 / 16);
+
+  @apply -translate-x-[18px] lg:-translate-x-[60px];
 }
 </style>

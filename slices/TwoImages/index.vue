@@ -18,11 +18,11 @@ const withText = ref(props.slice.variation === "withText");
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
   >
-    <div v-if="!withText" class="grid grid-cols-2 gap-[24px]">
+    <div v-if="!withText" class="flex flex-col lg:grid lg:grid-cols-2 gap-[24px]">
       <CustomImage :image="slice.primary.left_image" />
       <CustomImage :image="slice.primary.right_image" />
     </div>
-    <div v-else class="grid grid-cols-2 gap-[24px]">
+    <div v-else class="flex flex-col lg:grid lg:grid-cols-2 gap-[24px]">
       <div class="flex flex-col gap-[24px]">
         <CustomImage :image="slice.primary.left[0].image" />
         <RichText class="font-slussen" :field="slice.primary.left[0].text" />
@@ -38,6 +38,7 @@ const withText = ref(props.slice.variation === "withText");
 <style scoped>
 .custom-image {
   width: 100%;
-  height: 650px;
+
+  @apply h-[300px] lg:h-[650px];
 }
 </style>

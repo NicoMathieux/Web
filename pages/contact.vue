@@ -9,7 +9,7 @@ const page = getPrismicSingle("contact");
     <div>
       <SliceZone
         wrapper="main"
-        class=" flex flex-col gap-[132px]"
+        class=" flex flex-col gap-[96px] lg:gap-[132px]"
         :slices="page.data.slices ?? []"
         :components="components"
       />

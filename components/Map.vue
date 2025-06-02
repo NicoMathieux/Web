@@ -137,14 +137,17 @@ const enableInteraction = () => {
     mapRef.value.touchPitch.enable()
     mapRef.value.touchZoomRotate.enable()
 }
+
+const { isMobile } = useDevice();
 </script>
 
 <template>
-	<div class="h-[670px] overflow-hidden relative">
+	<div class="h-[470px] lg:h-[670px] overflow-hidden relative">
 		<ImageDetails :place :date />
 		<MapboxMap
 			map-id="mapRef"
-			style="height: 700px; z-index: 0"
+			style="z-index: 0"
+			:style="{ 'height': isMobile ? '500px' : '700px' }"
 			:options="{
 				style: 'mapbox://styles/evanmartiin/cmap789d000n501s97gqh93vv',
 				boxZoom: false,

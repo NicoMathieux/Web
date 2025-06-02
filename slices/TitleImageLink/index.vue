@@ -20,7 +20,7 @@ defineProps(
 
     <div id="container" class="flex justify-between">
       <!-- Variation default -->
-      <div v-if="slice.primary.image" class="flex gap-[24px]">
+      <div v-if="slice.primary.image" class="flex gap-[24px] flex-col lg:flex-row">
         <CustomImage :image="slice.primary.image" class="w-2/3" />
         <div>
           <div class="font-rader leading-[90%] text-m">{{ slice.primary.image_title }}</div>
@@ -65,29 +65,36 @@ defineProps(
 
 <style scoped>
 section {
-  &[data-slice-variation="default"] .custom-image {
-    width: 850px;
-    height: 600px;
+  &[data-slice-variation="default"] #container {
+    @apply flex-col lg:flex-row;
+
+    .custom-image {
+      @apply w-full lg:w-[850px] h-[400px] lg:h-[600px];
+    }
   }
 
-  &[data-slice-variation="double"] #container > div {
-    &:nth-child(1) {
-      @apply w-1/2;
-    }
+  &[data-slice-variation="double"] #container {
+    @apply flex-col lg:flex-row;
 
-    &:nth-child(2) {
-      @apply w-1/3;
+    & > div {
+      &:nth-child(1) {
+        @apply w-full lg:w-1/2 mb-[48px] lg:mb-[0px];
+      }
+
+      &:nth-child(2) {
+        @apply w-full lg:w-1/3;
+      }
     }
   }
   
   &[data-slice-variation="triple"] #container {
-    @apply gap-[24px];
+    @apply gap-[24px] flex-row overflow-x-auto lg:overflow-auto -mx-[18px] lg:mx-[0px] px-[18px] lg:px-[0px];
 
     & > div {
-      @apply w-1/3;
+      @apply w-full lg:w-1/3;
 
       & > .custom-image {
-        height: 500px;
+        @apply w-[70vw] lg:w-auto h-[350px] lg:h-[500px];
       }
     }
   }

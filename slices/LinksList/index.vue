@@ -20,8 +20,8 @@ defineProps(
 
     <div>
       <div v-for="link in slice.primary.links" class="flex justify-between items-end border-b border-snow/50 py-[24px]">
-        <PrismicLink :field="link.link" class="font-rader text-xl leading-[80%]" />
-        <span class="font-slussen">{{ link.subtitle }}</span>
+        <PrismicLink :field="link.link" class="font-rader text-l lg:text-xl leading-[90%] lg:leading-[80%]" />
+        <span class="font-slussen text-right">{{ link.subtitle }}</span>
       </div>
     </div>
   </section>
