@@ -60,23 +60,32 @@ const initGL = () => {
 
     const pixelRatio = window.devicePixelRatio;
 
-    const handleResize = (entries) => {
+    const handleResize = () => {
         if (!canvas.value) return;
 
-        const {
-            width: canvasWidth,
-            height: canvasHeight
-        } = entries[0].contentRect;
+        // const {
+        //     width: canvasWidth,
+        //     height: canvasHeight
+        // } = entries[0].contentRect;
 
-        canvas.value.width = Math.round(canvasWidth * pixelRatio);
-        canvas.value.height = Math.round(canvasHeight * pixelRatio);
+        // canvas.value.width = Math.round(canvasWidth * pixelRatio);
+        // canvas.value.height = Math.round(canvasHeight * pixelRatio);
 
-        size.width = gl.drawingBufferWidth;
-        size.height = gl.drawingBufferHeight;
+        const width = gl.canvas.clientWidth;
+        const height = gl.canvas.clientHeight;
+        
+        if (gl.canvas.width != width ||
+        gl.canvas.height != height) {
+            gl.canvas.width = width * pixelRatio;
+            gl.canvas.height = height * pixelRatio;
+            size.width = gl.drawingBufferWidth;
+            size.height = gl.drawingBufferHeight;
+        }
+
     }
 
-    const resizeObserver = new ResizeObserver(handleResize);
-    resizeObserver.observe(canvas.value);
+    // const resizeObserver = new ResizeObserver(handleResize);
+    // resizeObserver.observe(canvas.value);
 
     const quadData = new Float32Array([
         -1, 3, 0, 2,
@@ -154,6 +163,8 @@ const initGL = () => {
     let rafID = null;
 
     const render = (time = 0) => {
+        handleResize();
+
         gl.viewport(0, 0, size.width, size.height);
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
