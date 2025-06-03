@@ -30,6 +30,8 @@ onUnmounted(() => {
 })
 
 const { isMobile } = useDevice();
+const { enable, disable, isAudioOn } = await useAudio();
+const { hasInteracted } = useInteraction();
 </script>
 
 <template>
@@ -55,10 +57,30 @@ const { isMobile } = useDevice();
       <div class="relative w-full h-full z-[3] flex items-center justify-center">
         <div class="font-slussen flex w-full justify-between absolute px-[24px] lg:px-[36px] bottom-[36px] lg:bottom-[48px]">
           <span>(PAR) {{ time }}<span v-show="!isMobile"> + GMT</span></span>
-          <span>SOUND: ON/OFF</span>
+
+          <Transition name="fade" appear>
+            <span v-if="hasInteracted && isAudioOn !== null">SOUND: <span class="cursor-pointer" :class="{ 'opacity-50': isAudioOn }" @click="enable">ON</span>/<span class="cursor-pointer" :class="{ 'opacity-50': !isAudioOn }" @click="disable">OFF</span></span>
+          </Transition>
         </div>
       </div>
     </div>
   </Scratched>
   </section>
 </template>
+
+<style scoped>
+.fade-enter-active {
+  transition: opacity 0.5s ease;
+}
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+</style>

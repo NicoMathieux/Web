@@ -40,6 +40,15 @@
             }
           }
         }
+      },
+      "ambient_sound": {
+        "type": "Link",
+        "config": {
+          "label": "Son d'ambiance",
+          "placeholder": "",
+          "select": "media",
+          "allowText": false
+        }
       }
     }
   }

@@ -792,6 +792,17 @@ interface SettingsDocumentData {
   social_medias: prismic.GroupField<
     Simplify<SettingsDocumentDataSocialMediasItem>
   >;
+
+  /**
+   * Son d'ambiance field in *Paramètres*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.ambient_sound
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  ambient_sound: prismic.LinkToMediaField<prismic.FieldState, never>;
 }
 
 /**
