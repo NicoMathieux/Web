@@ -5,7 +5,20 @@ export const getPrismicSingle = (id: string) => {
 
 export const getPrismicReusable = (type: string, id: string) => {
   const { client } = usePrismic();
-  return useAsyncData(`[${type}-${id}]`, () => client.getByUID(type, id)).data;
+  const data = useAsyncData(`[${type}-${id}]`, () => client.getByUID(type, id));
+
+  if (import.meta.client) {
+    if (!data.data.value) {
+      const route = useRoute();
+      throw createError({
+        statusCode: 404,
+        statusMessage: `Page Not Found: ${route.fullPath}`,
+        fatal: true,
+      })
+    }
+  }
+
+  return data.data;
 };
 
 export const makePrismicLink = (url: string) => {

@@ -30,10 +30,10 @@ export default defineNuxtConfig({
     endpoint: apiEndpoint || repositoryName,
     clientConfig: {
       routes: [
-        // {
-        //   type: 'page',
-        //   path: '/:uid',
-        // },
+        {
+          type: 'page',
+          path: '/:uid',
+        },
         {
           type: 'consulting',
           path: '/consulting',
