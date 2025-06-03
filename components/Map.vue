@@ -253,7 +253,16 @@ const enableInteraction = () => {
 }
 
 onBeforeRouteLeave(() => {
-	console.log("leave")
+	if (map.getLayer('startLayer')) map.removeLayer('startLayer');
+	if (map.getLayer('endLayer')) map.removeLayer('endLayer');
+	if (map.getLayer('gpxLayer')) map.removeLayer('gpxLayer');
+
+	if (map.getSource('endpointsData')) map.removeSource('endpointsData');
+	if (map.getSource('gpxData')) map.removeSource('gpxData');
+
+	if (map.hasImage('gpx-start')) map.removeImage('gpx-start');
+	if (map.hasImage('gpx-end')) map.removeImage('gpx-end');
+		
 	map.remove();
 	map = null;
 })
