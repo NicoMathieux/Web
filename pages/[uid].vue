@@ -2,7 +2,7 @@
 import { components } from '~/slices'
 
 const route = useRoute();
-const page = getPrismicReusable("page", route.params.uid as string);
+const page = await getPrismicReusable("page", route.params.uid as string);
 
 useMeta(page);
 </script>

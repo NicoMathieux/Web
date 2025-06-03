@@ -3,22 +3,37 @@ export const getPrismicSingle = (id: string) => {
   return useAsyncData(id, () => client.getSingle(id)).data;
 };
 
-export const getPrismicReusable = (type: string, id: string) => {
+export const getPrismicReusable = async (type: string, id: string) => {
   const { client } = usePrismic();
-  const data = useAsyncData(`[${type}-${id}]`, () => client.getByUID(type, id));
+  const { data, error } = await useAsyncData(`[${type}-${id}]`, () =>
+    client.getByUID(type, id)
+  )
 
-  if (import.meta.client) {
-    if (!data.data.value) {
-      const route = useRoute();
-      throw createError({
-        statusCode: 404,
-        statusMessage: `Page Not Found: ${route.fullPath}`,
-        fatal: true,
-      })
-    }
+  // Côté serveur (SSR)
+  if (import.meta.server && error.value) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: `Page not found: ${type}/${id}`,
+    })
   }
 
-  return data.data;
+  // Côté client (SPA)
+  if (import.meta.client) {
+    const nuxtError = useError()
+    watch(
+      () => error.value,
+      (err) => {
+        if (err) {
+          nuxtError.value = createError({
+            statusCode: 404,
+            statusMessage: `Page not found: ${type}/${id}`,
+          })
+        }
+      }
+    )
+  }
+
+  return data
 };
 
 export const makePrismicLink = (url: string) => {
