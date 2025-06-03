@@ -1,10 +1,12 @@
 <script setup lang="ts">
 const footer = getPrismicSingle("footer");
 const params = getPrismicSingle("settings");
+
+const { isMobile } = useDevice();
 </script>
 
 <template>
-    <div class="w-full p-[60px] bg-snow text-coal flex justify-between flex-col lg:flex-row">
+    <div class="w-full p-[60px] bg-snow text-coal flex justify-between flex-col lg:flex-row relative mask-container" :class="isMobile ? 'mobile' : 'desktop'">
         <div class="flex flex-col justify-between">
             <span class="font-vermin text-s">{{ params.data.website_title }}</span>
             <span class="font-slussen mt-[12px] lg:mt-[0px]">{{ footer.data.copyright }}</span>
@@ -27,3 +29,38 @@ const params = getPrismicSingle("settings");
         </div>
     </div>
 </template>
+
+<style scoped>
+.mask-container {
+    &.desktop::before, &.desktop::after {
+        mask-image: url('/assets/images/masks/menu-desktop.png');
+    }
+
+    &.mobile::before, &.mobile::after {
+        mask-image: url('/assets/images/masks/menu-mobile.png');
+    }
+
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 11px;
+        pointer-events: none;
+        background: white;
+        z-index: 2;
+        mask-size: 100% auto;
+        mask-position: bottom;
+        mask-repeat: no-repeat;
+    }
+
+    &::before {
+        top: -10px;
+        transform: rotateZ(180deg);
+    }
+
+    &::after {
+        bottom: -10px;
+    }
+}
+</style>

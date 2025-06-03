@@ -271,6 +271,6 @@ onBeforeRouteLeave(() => {
 <template>
 	<div class="h-[450px] lg:h-[670px] overflow-hidden relative">
 		<ImageDetails :place :date />
-		<div class="z-[0]" :class="isMobile ? 'h-[500px]' : 'h-[700px]'" ref="mapContainer"></div>
+		<Scratched><div class="z-[0]" :class="isMobile ? 'h-[500px]' : 'h-[700px]'" ref="mapContainer"></div></Scratched>
 	</div>
 </template>

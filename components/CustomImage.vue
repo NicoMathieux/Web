@@ -5,12 +5,12 @@ defineProps<{
     date?: String,
     width?: String,
     height?: String
-}>()
+}>();
 </script>
 
 <template>
     <div :style="{ width, height }" class="relative custom-image overflow-hidden">
-        <PrismicImage :field="image" class="object-cover w-full h-full" />
+        <Scratched><PrismicImage :field="image" class="object-cover w-full h-full" /></Scratched>
         <ImageDetails v-if="place && date" :place :date />
         <div v-else class="corners-container absolute w-full h-full top-0 left-0 p-[12px] lg:p-[24px] flex flex-col justify-between pointer-events-none">
             <div>
