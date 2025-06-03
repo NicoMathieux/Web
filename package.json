@@ -13,9 +13,9 @@
   "dependencies": {
     "@nuxtjs/device": "3.2.4",
     "@we-gold/gpxjs": "^1.1.0",
+    "mapbox-gl": "^3.12.0",
     "nanogl": "^2.3.2",
     "nuxt": "^3.15.4",
-    "nuxt-mapbox": "^1.6.3",
     "tweakpane": "^4.0.5",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
@@ -25,7 +25,6 @@
     "@nuxtjs/prismic": "^4.0.0",
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@slicemachine/adapter-nuxt": "^0.3.68",
-    "mapbox-gl": "^3.12.0",
     "slice-machine-ui": "^2.13.1"
   },
   "packageManager": "pnpm@10.5.2+sha1.ca68c0441df195b7e2992f1d1cb12fb731f82d78"

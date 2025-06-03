@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { parseGPX } from "@we-gold/gpxjs";
+import mapboxgl from "mapbox-gl";
+mapboxgl.accessToken = "pk.eyJ1IjoiZXZhbm1hcnRpaW4iLCJhIjoiY21hcGZqbWl0MGZ5eTJqcXRxd244NXBmbiJ9.kMMXB_B33VtEUTD3aGUvzA";
 
 const props = defineProps<{
 	place: String;
@@ -7,9 +9,9 @@ const props = defineProps<{
 	gpx: String;
 }>();
 
-let mounted = false, animationStarted = false;
+let mapLoaded = false, imagesLoaded = false;
 
-const shownGeoJson = ref({
+let shownGeoJson = {
 	type: "FeatureCollection",
 	features: [
 		{
@@ -20,27 +22,76 @@ const shownGeoJson = ref({
 			},
 		},
 	],
-});
+};
 
-let geoJsonCoords;
-const bounds = ref();
-const endpoints = ref();
-const mapRef = useMapboxRef("mapRef");
+let geoJsonCoords = [];
+let bounds = [];
+let endpoints = {};
+let map;
+const mapContainer = ref(null);
 
 const { isMobile } = useDevice();
 
-const onLoad = () => {
-	mapRef.value.loadImage("/assets/images/gpx-start.png", (error, image) => {
-		if (error) throw error;
-		mapRef.value.addImage("gpx-start", image);
-	});
-	mapRef.value.loadImage("/assets/images/gpx-end.png", (error, image) => {
-		if (error) throw error;
-		mapRef.value.addImage("gpx-end", image);
-	});
-};
-
 onMounted(async () => {
+	initMap();
+
+	loadImages();
+
+	await processGPX();
+})
+
+const initMap = () => {
+	map = new mapboxgl.Map({
+		container: mapContainer.value,
+		style: "mapbox://styles/evanmartiin/cmap789d000n501s97gqh93vv",
+		boxZoom: false,
+		doubleClickZoom: false,
+		dragPan: false,
+		dragRotate: false,
+		keyboard: false,
+		pitchWithRotate: false,
+		scrollZoom: false,
+		touchPitch: false,
+		touchZoomRotate: false,
+	});
+	map.on('load', () => {
+		mapLoaded = true;
+		onLoaded();
+	});
+}
+
+const fitBounds = () => {
+	map.fitBounds(bounds, {
+		padding: { top: 50, bottom: isMobile ? 100 : 80, left: 50, right: 50 }
+	});
+}
+
+const loadImages = async () => {
+	if (!map.hasImage("gpx-start")) {
+		map.loadImage("/assets/images/gpx-start.png", (error, image) => {
+			if (error) throw error;
+			map.addImage("gpx-start", image);
+			if (map.hasImage("gpx-end")) {
+				imagesLoaded = true;
+				onLoaded();
+			}
+		});
+	}
+
+	if (!map.hasImage("gpx-end")) {
+		map.loadImage("/assets/images/gpx-end.png", (error, image) => {
+			if (error) throw error;
+			map.addImage("gpx-end", image);
+			if (map.hasImage("gpx-start")) {
+				imagesLoaded = true;
+				onLoaded();
+			}
+		});
+	}
+}
+
+// Loading GPX, parsing it, and sorting to get track bounds, and track endpoints
+const processGPX = async () => {
 	const response = await fetch(props.gpx);
 	const text = await response.text();
 
@@ -50,14 +101,10 @@ onMounted(async () => {
 
 	const geo = parsedFile.toGeoJSON();
 	geoJsonCoords = geo.features.find((el) => el.geometry.type === 'LineString')!.geometry.coordinates;
-	bounds.value = getBounds(geo);
-
-	mapRef.value.fitBounds(bounds.value, {
-		padding: { top: 50, bottom: isMobile ? 100 : 80, left: 50, right: 50 }
-	});
+	bounds = getBounds(geo);
 
 	const ends = getEndpoints(geo);
-	endpoints.value = {
+	endpoints = {
 		type: "FeatureCollection",
 		features: [
 			{
@@ -82,20 +129,73 @@ onMounted(async () => {
 			},
 		],
 	};
+}
 
-	mounted = true;
-});
+// Starting point for every functions on mapRef like addSource, addLayer, getSource, ...
+const onLoaded = () => {
+	if (!mapLoaded || !imagesLoaded) return;
 
-const onZoomEnd = () => {
-	if (mounted && !animationStarted) {
-		animationStarted = true;
-		mapRef.value.setPaintProperty("start-layer", "icon-opacity", 1);
-		setTimeout(() => {
-			startTime = performance.now();
-			animateLine();
-		}, 500);
-	}
-};
+	fitBounds();
+	
+	addGeojson();
+	addEndpoints();
+
+	map.on('zoomend', onZoomEnd);
+}
+
+// Adding source and 2 layers for gpx track start and end
+const addEndpoints = () => {
+	map.addSource("endpointsData", { type: 'geojson', data: endpoints });
+
+	map.addLayer({
+		id: "startLayer",
+		source: "endpointsData",
+		type: "symbol",
+		layout: {
+			"icon-image": "gpx-start",
+			"icon-size": 0.2
+		},
+		paint: {
+			"icon-opacity": 0,
+			"icon-opacity-transition": { duration: 500 }
+		},
+		filter: ["==", "position", "first"]
+	})
+
+	map.addLayer({
+		id: "endLayer",
+		source: "endpointsData",
+		type: "symbol",
+		layout: {
+			"icon-image": "gpx-end",
+			"icon-size": 0.2
+		},
+		paint: {
+			"icon-opacity": 0,
+			"icon-opacity-transition": { duration: 500 }
+		},
+		filter: ["==", "position", "last"]
+	})
+}
+
+// Adding source and layer for gpx track
+const addGeojson = () => {
+	map.addSource("gpxData", { type: 'geojson', data: shownGeoJson });
+
+	map.addLayer({
+		id: "gpxLayer",
+		source: "gpxData",
+		type: "line",
+		layout: {
+			"line-join": "round",
+			"line-round-limit": 0
+		},
+		paint: {
+			"line-color": "#FFF",
+			"line-width": 5
+		},
+	});
+}
 
 let animation;
 let startTime = 0;
@@ -103,13 +203,25 @@ let progress = 0;
 let duration = 5000;
 let currentIndex = 0;
 let index = 0;
+let animationStarted = false;
+
+const onZoomEnd = () => {
+	if (!animationStarted) {
+		animationStarted = true;
+		map.setPaintProperty("startLayer", "icon-opacity", 1);
+		setTimeout(() => {
+			startTime = performance.now();
+			animateLine();
+		}, 500);
+	}
+};
 
 const animateLine = () => {
 	progress = performance.now() - startTime;
 
 	if (progress > duration) { // On animation ended
 		addCoords(currentIndex, geoJsonCoords.length);
-		mapRef.value.setPaintProperty("end-layer", "icon-opacity", 1);
+		map.setPaintProperty("endLayer", "icon-opacity", 1);
 		enableInteraction();
 		cancelAnimationFrame(animation);
 	} else {
@@ -124,107 +236,30 @@ const animateLine = () => {
 
 const addCoords = (start, end) => {
 	for (var i = start; i < end; i++) {
-		shownGeoJson.value.features[0].geometry.coordinates.push(geoJsonCoords[i]);
-		mapRef.value.getSource("gpxFile").setData(shownGeoJson.value);
+		shownGeoJson.features[0].geometry.coordinates.push(geoJsonCoords[i]);
+		map.getSource("gpxData").setData(shownGeoJson);
 	}
 }
 
 const enableInteraction = () => {
-	mapRef.value.boxZoom.enable()
-    mapRef.value.doubleClickZoom.enable()
-    mapRef.value.dragPan.enable()
-    mapRef.value.dragRotate.enable()
-    mapRef.value.keyboard.enable()
-    mapRef.value.scrollZoom.enable()
-    mapRef.value.touchPitch.enable()
-    mapRef.value.touchZoomRotate.enable()
+	map.boxZoom.enable()
+    map.doubleClickZoom.enable()
+    map.dragPan.enable()
+    map.dragRotate.enable()
+    map.keyboard.enable()
+    map.scrollZoom.enable()
+    map.touchPitch.enable()
+    map.touchZoomRotate.enable()
 }
+
+onBeforeRouteLeave(() => {
+	fitBounds();
+})
 </script>
 
 <template>
 	<div class="h-[450px] lg:h-[670px] overflow-hidden relative">
 		<ImageDetails :place :date />
-		<MapboxMap
-			map-id="mapRef"
-			style="z-index: 0"
-			:style="{ 'height': isMobile ? '500px' : '700px' }"
-			:options="{
-				style: 'mapbox://styles/evanmartiin/cmap789d000n501s97gqh93vv',
-				boxZoom: false,
-				doubleClickZoom: false,
-				dragPan: false,
-				dragRotate: false,
-				keyboard: false,
-				pitchWithRotate: false,
-				scrollZoom: false,
-				touchPitch: false,
-				touchZoomRotate: false,
-			}"
-			@load="onLoad"
-			@zoomend="onZoomEnd"
-		>
-			<MapboxSource
-				source-id="gpxFile"
-				:source="{
-					type: 'geojson',
-					data: shownGeoJson,
-				}"
-			/>
-			<MapboxLayer
-				:layer="{
-					source: 'gpxFile',
-					id: 'geojson-layer',
-					type: 'line',
-					paint: {
-						'line-color': '#FFF',
-						'line-width': 5,
-					},
-					layout: {
-						'line-join': 'round',
-						'line-round-limit': 0,
-					},
-				}"
-			/>
-
-			<MapboxSource
-				source-id="endpointsData"
-				:source="{
-					type: 'geojson',
-					data: endpoints,
-				}"
-			/>
-			<MapboxLayer
-				:layer="{
-					source: 'endpointsData',
-					id: 'start-layer',
-					type: 'symbol',
-					layout: {
-						'icon-image': 'gpx-start',
-						'icon-size': 0.2,
-					},
-					paint: {
-						'icon-opacity': 0,
-						'icon-opacity-transition': { duration: 500 },
-					},
-					filter: ['==', 'position', 'first'],
-				}"
-			/>
-			<MapboxLayer
-				:layer="{
-					source: 'endpointsData',
-					id: 'end-layer',
-					type: 'symbol',
-					layout: {
-						'icon-image': 'gpx-end',
-						'icon-size': 0.2,
-					},
-					paint: {
-						'icon-opacity': 0,
-						'icon-opacity-transition': { duration: 500 },
-					},
-					filter: ['==', 'position', 'last'],
-				}"
-			/>
-		</MapboxMap>
+		<div class="z-[0]" :class="isMobile ? 'h-[500px]' : 'h-[700px]'" ref="mapContainer"></div>
 	</div>
 </template>
