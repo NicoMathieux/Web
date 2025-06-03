@@ -2,6 +2,8 @@
 import { components } from '~/slices'
 
 const page = getPrismicSingle("contact");
+
+useMeta(page);
 </script>
 
 <template>

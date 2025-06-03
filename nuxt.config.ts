@@ -12,6 +12,16 @@ export default defineNuxtConfig({
     accessToken: 'pk.eyJ1IjoiZXZhbm1hcnRpaW4iLCJhIjoiY21hcGZqbWl0MGZ5eTJqcXRxd244NXBmbiJ9.kMMXB_B33VtEUTD3aGUvzA'
   },
 
+  app: {
+    head: {
+      title: 'Nico Mathieux',
+      htmlAttrs: {
+        lang: 'fr',
+      },
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    }
+  },
+
   css: [
     '~/styles/global.css',
   ],

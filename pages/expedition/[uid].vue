@@ -3,6 +3,8 @@ import { components } from '~/slices'
 
 const route = useRoute();
 const page = getPrismicReusable("expedition", route.params.uid as string);
+
+useMeta(page);
 </script>
 
 <template>

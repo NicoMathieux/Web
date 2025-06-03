@@ -707,17 +707,6 @@ interface SettingsDocumentData {
   website_title: prismic.KeyTextField;
 
   /**
-   * Favicon field in *Paramètres*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.favicon
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  favicon: prismic.ImageField<never>;
-
-  /**
    * Réseaux sociaux field in *Paramètres*
    *
    * - **Field Type**: Group

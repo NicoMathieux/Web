@@ -13,14 +13,6 @@
           "placeholder": ""
         }
       },
-      "favicon": {
-        "type": "Image",
-        "config": {
-          "label": "Favicon",
-          "constraint": {},
-          "thumbnails": []
-        }
-      },
       "social_medias": {
         "type": "Group",
         "config": {
