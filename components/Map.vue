@@ -253,7 +253,9 @@ const enableInteraction = () => {
 }
 
 onBeforeRouteLeave(() => {
-	fitBounds();
+	console.log("leave")
+	map.remove();
+	map = null;
 })
 </script>
 
