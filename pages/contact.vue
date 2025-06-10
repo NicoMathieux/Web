@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { components } from "~/slices";
 
-// definePageMeta({
-// 	middleware: "dev-only",
-// });
+definePageMeta({
+	middleware: "dev-only",
+});
 
 const page = getPrismicSingle("contact");
 
