@@ -1,17 +1,13 @@
 <script setup lang="ts">
 import { components } from "~/slices";
-import { isProduction } from "../utils/env";
+
+definePageMeta({
+	middleware: "dev-only",
+});
 
 const page = getPrismicSingle("contact");
 
 useMeta(page);
-
-if (isProduction()) {
-	throw createError({
-		statusCode: 404,
-		statusMessage: `Page not found: /contact`,
-	});
-}
 </script>
 
 <template>
