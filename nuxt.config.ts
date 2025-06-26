@@ -12,11 +12,6 @@ export default defineNuxtConfig({
     accessToken: 'pk.eyJ1IjoiZXZhbm1hcnRpaW4iLCJhIjoiY21hcGZqbWl0MGZ5eTJqcXRxd244NXBmbiJ9.kMMXB_B33VtEUTD3aGUvzA'
   },
 
-  runtimeConfig: {
-    gmailUser: process.env.GMAIL_USER,
-    gmailPass: process.env.GMAIL_PASS,
-  },
-
   nitro: {
     preset: 'netlify'
   },

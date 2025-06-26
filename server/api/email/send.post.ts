@@ -64,14 +64,12 @@ export default defineEventHandler(async (event) => {
 		return response.value
 	}
 
-    const config = useRuntimeConfig();
-
 	const transporter = nodemailer.createTransport({
 		service: 'gmail',
 		secure:  true,
 		auth:    {
-			user: config.gmailUser,
-			pass: config.gmailPass
+			user: process.env.gmailUser,
+			pass: process.env.gmailPass
 		}
 	})
 
