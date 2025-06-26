@@ -18,14 +18,14 @@ defineProps(
   >
     <Header :title="slice.primary.title" :subtitle="slice.primary.subtitle" />
 
-    <div id="container" class="flex justify-between">
+    <div id="container" class="flex justify-between" :class="(slice.primary.inverted && slice.variation === 'double') ? 'flex-col-reverse lg:flex-row-reverse' : 'flex-col lg:flex-row'">
       <!-- Variation default -->
-      <div v-if="slice.primary.image" class="flex gap-[24px] flex-col lg:flex-row">
+      <div v-if="slice.primary.image" class="flex gap-[24px] flex-col" :class="slice.primary.inverted ? 'flex-col-reverse lg:flex-row-reverse' : 'lg:flex-row'">
         <CustomImage :image="slice.primary.image" class="w-2/3" />
         <div>
           <div class="font-rader leading-[90%] text-m">{{ slice.primary.image_title }}</div>
           <div class="font-slussen mt-[12px]"><RichText :field="slice.primary.text" /></div>
-          <div class="mt-[18px]"><CustomButton :link="slice.primary.link" /></div>
+          <div v-if="slice.primary.link.id" class="mt-[18px]"><CustomButton :link="slice.primary.link" /></div>
         </div>
       </div>
 
@@ -37,7 +37,7 @@ defineProps(
         />
         <div class="font-rader leading-[90%] text-m mt-[24px]">{{ slice.primary.left[0].title }}</div>
         <div class="font-slussen mt-[12px]"><RichText :field="slice.primary.left[0].text" /></div>
-        <div class="mt-[18px]"><CustomButton :link="slice.primary.left[0].link" /></div>
+        <div v-if="slice.primary.left[0].link.id" class="mt-[18px]"><CustomButton :link="slice.primary.left[0].link" /></div>
       </div>
 
       <!-- Variation triple -->
@@ -45,7 +45,7 @@ defineProps(
         <CustomImage :image="slice.primary.center[0].image" />
         <div class="font-rader leading-[90%] text-m mt-[24px]">{{ slice.primary.center[0].title }}</div>
         <div class="font-slussen mt-[12px]"><RichText :field="slice.primary.center[0].text" /></div>
-        <div class="mt-[18px]"><CustomButton :link="slice.primary.center[0].link" /></div>
+        <div v-if="slice.primary.center[0].link.id" class="mt-[18px]"><CustomButton :link="slice.primary.center[0].link" /></div>
       </div>
 
       <div v-if="slice.primary.right">
@@ -56,7 +56,7 @@ defineProps(
         />
         <div class="font-rader leading-[90%] text-m mt-[24px]">{{ slice.primary.right[0].title }}</div>
         <div class="font-slussen mt-[12px]"><RichText :field="slice.primary.right[0].text" /></div>
-        <div class="mt-[18px]"><CustomButton :link="slice.primary.right[0].link" /></div>
+        <div v-if="slice.primary.right[0].link.id" class="mt-[18px]"><CustomButton :link="slice.primary.right[0].link" /></div>
       </div>
     </div>
   </section>
@@ -74,11 +74,11 @@ section {
   }
 
   &[data-slice-variation="double"] #container {
-    @apply flex-col lg:flex-row;
+    @apply gap-[48px] lg:gap-[0px];
 
     & > div {
       &:nth-child(1) {
-        @apply w-full lg:w-1/2 mb-[48px] lg:mb-[0px];
+        @apply w-full lg:w-1/2;
       }
 
       &:nth-child(2) {

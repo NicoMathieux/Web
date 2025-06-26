@@ -60,6 +60,10 @@
 					"url": "https://prismic.io",
 					"text": "three"
 				}
+			},
+			"inverted": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": []
@@ -249,6 +253,10 @@
 						]
 					}
 				]
+			},
+			"inverted": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": [
@@ -469,8 +477,8 @@
 							[
 								"link",
 								{
-									"__TYPE__": "LinkContent",
 									"key": "963d6edc-b90d-4b02-8753-329e6dad471d",
+									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "ExternalLink",
 										"url": "https://slicemachine.dev",

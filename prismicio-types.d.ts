@@ -5,7 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type ConsultingDocumentDataSlicesSlice =
-  | HeroSlice
+  | ContactFormSlice
   | DoubleImageLinkSlice
   | TwoImagesSlice
   | ImageCarouselLinkSlice
@@ -82,6 +82,7 @@ export type ConsultingDocument<Lang extends string = string> =
   >;
 
 type ContactDocumentDataSlicesSlice =
+  | ContactFormSlice
   | DoubleImageLinkSlice
   | ImageCarouselLinkSlice
   | YoutubeVideoSlice
@@ -158,6 +159,7 @@ export type ContactDocument<Lang extends string = string> =
   >;
 
 type ExpeditionDocumentDataSlicesSlice =
+  | ContactFormSlice
   | ImageCarouselLinkSlice
   | DoubleImageLinkSlice
   | LinksListSlice
@@ -295,6 +297,7 @@ export type ExpeditionDocument<Lang extends string = string> =
   >;
 
 type ExpeditionsDocumentDataSlicesSlice =
+  | ContactFormSlice
   | ImageCarouselLinkSlice
   | DoubleImageLinkSlice
   | TwoImagesSlice
@@ -453,6 +456,7 @@ export type FooterDocument<Lang extends string = string> =
   >;
 
 type HomeDocumentDataSlicesSlice =
+  | ContactFormSlice
   | HeroSlice
   | DoubleImageLinkSlice
   | ImageCarouselLinkSlice
@@ -603,6 +607,7 @@ export type MenuDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenuDocumentData>, "menu", Lang>;
 
 type PageDocumentDataSlicesSlice =
+  | ContactFormSlice
   | DoubleImageLinkSlice
   | TitleTextImageSlice
   | TwoImagesSlice
@@ -894,6 +899,88 @@ export type AllDocumentTypes =
   | ProductDocument
   | SettingsDocument
   | ShopDocument;
+
+/**
+ * Item in *ContactForm → Default → Primary → Catégories*
+ */
+export interface ContactFormSliceDefaultPrimaryCategoriesItem {
+  /**
+   * Catégorie field in *ContactForm → Default → Primary → Catégories*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.default.primary.categories[].category
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  category: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *ContactForm → Default → Primary*
+ */
+export interface ContactFormSliceDefaultPrimary {
+  /**
+   * Catégories field in *ContactForm → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.default.primary.categories[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  categories: prismic.GroupField<
+    Simplify<ContactFormSliceDefaultPrimaryCategoriesItem>
+  >;
+
+  /**
+   * Destinataire field in *ContactForm → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: marketing@nicomathieux.com
+   * - **API ID Path**: contact_form.default.primary.recipient
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  recipient: prismic.KeyTextField;
+
+  /**
+   * Image field in *ContactForm → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for ContactForm Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactFormSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContactFormSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContactForm*
+ */
+type ContactFormSliceVariation = ContactFormSliceDefault;
+
+/**
+ * ContactForm Shared Slice
+ *
+ * - **API ID**: `contact_form`
+ * - **Description**: ContactForm
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactFormSlice = prismic.SharedSlice<
+  "contact_form",
+  ContactFormSliceVariation
+>;
 
 /**
  * Item in *DoubleCards → Default → Primary → Gauche*
@@ -1368,6 +1455,17 @@ export interface DoubleImageLinkSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Inversé field in *TitleImageLink → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: double_image_link.default.primary.inverted
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  inverted: prismic.BooleanField;
 }
 
 /**
@@ -1428,6 +1526,17 @@ export interface DoubleImageLinkSliceDoublePrimary {
   right: prismic.GroupField<
     Simplify<DoubleImageLinkSliceDoublePrimaryRightItem>
   >;
+
+  /**
+   * Inversé field in *TitleImageLink → Double → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: double_image_link.double.primary.inverted
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  inverted: prismic.BooleanField;
 }
 
 /**
@@ -2191,6 +2300,17 @@ export interface TitleTextImageSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#date
    */
   image_date: prismic.DateField;
+
+  /**
+   * Inversé field in *TitleTextImage → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: title_text_image.default.primary.inverted
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  inverted: prismic.BooleanField;
 }
 
 /**
@@ -2261,6 +2381,17 @@ export interface TitleTextImageSliceWithCarouselPrimary {
   element: prismic.GroupField<
     Simplify<TitleTextImageSliceWithCarouselPrimaryElementItem>
   >;
+
+  /**
+   * Inversé field in *TitleTextImage → Avec carousel → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: title_text_image.withCarousel.primary.inverted
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  inverted: prismic.BooleanField;
 }
 
 /**
@@ -2537,6 +2668,11 @@ declare module "@prismicio/client" {
       ShopDocumentData,
       ShopDocumentDataSlicesSlice,
       AllDocumentTypes,
+      ContactFormSlice,
+      ContactFormSliceDefaultPrimaryCategoriesItem,
+      ContactFormSliceDefaultPrimary,
+      ContactFormSliceVariation,
+      ContactFormSliceDefault,
       DoubleCardsSlice,
       DoubleCardsSliceDefaultPrimaryLeftItem,
       DoubleCardsSliceDefaultPrimaryRightItem,

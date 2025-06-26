@@ -37,14 +37,15 @@ const nextSlide = () => {
   >
     <Header :title="slice.primary.title" :subtitle="slice.primary.subtitle" />
 
-    <div class="flex flex-col-reverse lg:grid lg:grid-cols-5">
-      <div class="col-span-2 mt-[24px] lg:mt-[0px]">
+    <div class="flex flex-col-reverse gap-[24px] lg:grid lg:grid-cols-5">
+      <div class="col-span-2" :class="{ 'col-end-6': slice.primary.inverted }">
         <div class="font-slussen"><RichText :field="slice.primary.text" /></div>
-        <div class="mt-[18px]"><CustomButton :link="slice.primary.link" /></div>
+        <div v-if="slice.primary.link.id" class="mt-[18px]"><CustomButton :link="slice.primary.link" /></div>
       </div>
-      <CustomImage v-if="slice.primary.image && !withCarousel" :image="slice.primary.image" :date="slice.primary.image_date" :place="slice.primary.image_place" class="col-span-2 col-end-6" />
 
-      <div v-else-if="withCarousel" class="col-span-2 col-end-6 relative">
+      <CustomImage v-if="slice.primary.image && !withCarousel" :image="slice.primary.image" :date="slice.primary.image_date" :place="slice.primary.image_place" class="col-span-2 relative" :class="slice.primary.inverted ? 'order-first' : 'col-end-6'" />
+
+      <div v-else-if="withCarousel" class="col-span-2 relative" :class="slice.primary.inverted ? 'order-first' : 'col-end-6'">
         <Carousel
           ref="carousel"
           :wrap-around="true"

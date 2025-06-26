@@ -65,6 +65,10 @@
 				"__TYPE__": "FieldContent",
 				"value": "something",
 				"type": "Text"
+			},
+			"inverted": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": []
@@ -84,8 +88,8 @@
 				"type": "Text"
 			},
 			"link": {
-				"__TYPE__": "LinkContent",
 				"key": "595c1508-76ef-44e7-a52c-cf7071b2a8e0",
+				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "ExternalLink",
 					"url": "http://twitter.com",
@@ -154,6 +158,10 @@
 						}
 					}
 				]
+			},
+			"inverted": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": [

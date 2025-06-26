@@ -67,6 +67,15 @@
             "label": "Date image",
             "placeholder": ""
           }
+        },
+        "inverted": {
+          "type": "Boolean",
+          "config": {
+            "label": "Inversé",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {}
@@ -142,6 +151,15 @@
                 }
               }
             }
+          }
+        },
+        "inverted": {
+          "type": "Boolean",
+          "config": {
+            "label": "Inversé",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
           }
         }
       },
