@@ -68,8 +68,8 @@ export default defineEventHandler(async (event) => {
 		service: 'gmail',
 		secure:  true,
 		auth:    {
-			user: process.env.gmailUser,
-			pass: process.env.gmailPass
+			user: process.env.GMAIL_USER,
+			pass: process.env.GMAIL_PASS
 		}
 	})
 
