@@ -808,6 +808,17 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   ambient_sound: prismic.LinkToMediaField<prismic.FieldState, never>;
+
+  /**
+   * Web3Forms clé API field in *Paramètres*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.web3forms_api_key
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  web3forms_api_key: prismic.KeyTextField;
 }
 
 /**
@@ -930,16 +941,6 @@ export interface ContactFormSliceDefaultPrimary {
   categories: prismic.GroupField<
     Simplify<ContactFormSliceDefaultPrimaryCategoriesItem>
   >;
-
-  /**
-   * Destinataire field in *ContactForm → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: marketing@nicomathieux.com
-   * - **API ID Path**: contact_form.default.primary.recipient
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  recipient: prismic.KeyTextField;
 
   /**
    * Image field in *ContactForm → Default → Primary*

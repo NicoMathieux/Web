@@ -28,13 +28,6 @@
             }
           }
         },
-        "recipient": {
-          "type": "Text",
-          "config": {
-            "label": "Destinataire",
-            "placeholder": "marketing@nicomathieux.com"
-          }
-        },
         "image": {
           "type": "Image",
           "config": {

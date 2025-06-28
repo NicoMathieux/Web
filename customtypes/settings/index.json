@@ -49,6 +49,13 @@
           "select": "media",
           "allowText": false
         }
+      },
+      "web3forms_api_key": {
+        "type": "Text",
+        "config": {
+          "label": "Web3Forms clé API",
+          "placeholder": ""
+        }
       }
     }
   }

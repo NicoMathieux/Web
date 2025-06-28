@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Content } from "@prismicio/client";
 
-const props = defineProps(
+defineProps(
 	getSliceComponentProps<Content.ContactFormSlice>([
 		"slice",
 		"index",
@@ -9,6 +9,8 @@ const props = defineProps(
 		"context",
 	])
 );
+
+const params = getPrismicSingle("settings");
 
 const response = ref({
 	status: 0,
@@ -20,53 +22,67 @@ const isSubmitting = ref(false);
 const isSubmitted = ref(false);
 const timeout = ref();
 
-const sendEmail = async () => {
+const form = ref({
+  access_key: params.value.data.web3forms_api_key,
+  name: "",
+  email: "",
+  category: "",
+  subject: "",
+  message: "",
+});
+
+const submitForm = async () => {
+	form.value.subject = `[${form.value.category}] ${form.value.subject}`;
+	delete form.value.category;
+	form.value.from_name = form.value.name;
+
 	isSubmitting.value = true;
 	isSubmitted.value = false;
 
-	const formData = new FormData(
-		document.getElementById("form") as HTMLFormElement
-	);
-	const data = Object.fromEntries(formData.entries());
-	data.recipient = props.slice.primary.recipient;
+  try {
+    const result = await $fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: form.value,
+    });
 
-	try {
-		const result = await $fetch("/api/email/send", {
-			method: "POST",
-			body: data,
-		});
+	response.value = {
+		status: result.status,
+		message: result.message,
+		success: result.success,
+	};
 
-		response.value = {
-			status: result.status,
-			message: result.message,
-			success: result.success,
-		};
+	isSubmitted.value = result.status === 200;
 
-		isSubmitted.value = result.status === 200;
+	clearTimeout(timeout.value);
 
-		clearTimeout(timeout.value);
-
-		if (!isSubmitted.value) {
-			timeout.value = setInterval(() => {
-				response.value = {
-					status: 0,
-					message: "",
-					success: false,
-				};
-			}, 5000);
-		}
-	} catch (error) {
-		response.value = {
-			status: 500,
-			message:
-				error instanceof Error
-					? `Erreur : ${error.message}`
-					: "Une erreur inconnue est survenue.",
-			success: false,
-		};
-	} finally {
-		isSubmitting.value = false;
+	if (!isSubmitted.value) {
+		timeout.value = setTimeout(() => {
+			response.value = {
+				status: 0,
+				message: "",
+				success: false,
+			};
+		}, 5000);
 	}
+
+  } catch (error) {
+	response.value = {
+		status: 500,
+		message:
+			error instanceof Error
+				? `Erreur : ${error.message}`
+				: "Une erreur inconnue est survenue.",
+		success: false,
+	};
+  } finally {
+    form.value.name = "";
+    form.value.email = "";
+    form.value.category = "";
+    form.value.subject = "";
+    form.value.message = "";
+
+	isSubmitting.value = false;
+  }
 };
 
 const { isMobile } = useDevice();
@@ -82,19 +98,20 @@ const { isMobile } = useDevice();
 
 			<form
 				id="form"
-				@submit.prevent="sendEmail"
+				@submit.prevent="submitForm"
 				class="col-span-3 lg:col-span-2 grid grid-cols-3 gap-[30px] lg:gap-[45px]"
 			>
 				<div class="flex flex-col col-span-3 lg:col-span-1">
 					<label
-						for="user-name"
+						for="name"
 						class="font-rader text-m mb-[4px] lg:mb-[8px]"
 						>Nom</label
 					>
 					<input
 						type="text"
-						name="user_name"
-						id="user-name"
+						name="name"
+						id="name"
+						v-model="form.name"
 						placeholder="Nicolas Mathieux"
 						required
 					/>
@@ -102,14 +119,15 @@ const { isMobile } = useDevice();
 
 				<div class="flex flex-col col-span-3 lg:col-span-2">
 					<label
-						for="user-email"
+						for="email"
 						class="font-rader text-m mb-[4px] lg:mb-[8px]"
 						>Adresse mail</label
 					>
 					<input
 						type="email"
-						name="user_email"
-						id="user-email"
+						name="email"
+						id="email"
+						v-model="form.email"
 						placeholder="marketing@nicomathieux.com"
 						required
 					/>
@@ -121,7 +139,7 @@ const { isMobile } = useDevice();
 						class="font-rader text-m mb-[4px] lg:mb-[8px]"
 						>Type de demande</label
 					>
-					<select required name="category" id="category">
+					<select required name="category" id="category" v-model="form.category">
 						<option disabled selected value>Sélectionne...</option>
 						<option
 							v-for="item in slice.primary.categories"
@@ -134,14 +152,15 @@ const { isMobile } = useDevice();
 
 				<div class="flex flex-col col-span-3 lg:col-span-2">
 					<label
-						for="object"
+						for="subject"
 						class="font-rader text-m mb-[4px] lg:mb-[8px]"
 						>Objet</label
 					>
 					<input
 						type="text"
-						name="object"
-						id="object"
+						name="subject"
+						id="subject"
+						v-model="form.subject"
 						placeholder="Projet d'expédition sur la Lune"
 						required
 					/>
@@ -156,6 +175,7 @@ const { isMobile } = useDevice();
 					<textarea
 						id="message"
 						name="message"
+						v-model="form.message"
 						placeholder="Salut ! Je vous contacte pour..."
 						required
 						class="min-h-32"
@@ -185,16 +205,16 @@ const { isMobile } = useDevice();
 				</div>
 
 				<div :class="response.status !== 0 ? 'opacity-100' : 'opacity-0'" class="text-center font-slussen col-span-3">
-						<p
-							:class="
+					<p
+						:class="
 								response.success ? 'text-forest' : 'text-[#9A1C1C]'
-							"
-							class="text-m leading-[120%]"
-						>
+						"
+						class="text-m leading-[120%]"
+					>
 							<span class="font-bold">{{ response.success ? "Succès : " : "Erreur : " }}</span>
 							{{ response.message }}
-						</p>
-					</div>
+					</p>
+				</div>
 			</form>
 		</div>
 	</section>
