@@ -63,6 +63,8 @@ const submitForm = async () => {
 				success: false,
 			};
 		}, 5000);
+	} else {
+		response.message = "Votre email a bien été envoyé !"
 	}
 
   } catch (error) {
