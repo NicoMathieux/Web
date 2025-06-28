@@ -214,7 +214,7 @@ const { isMobile } = useDevice();
 						class="text-m leading-[120%]"
 					>
 							<span class="font-bold">{{ response.success ? "Succès : " : "Erreur : " }}</span>
-							{{ response.message }}
+							{{ response.success ? 'Votre email a bien été envoyé !' : response.message }}
 					</p>
 				</div>
 			</form>
