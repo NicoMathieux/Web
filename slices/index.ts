@@ -24,6 +24,7 @@ export const components = defineSliceZoneComponents({
   ),
   links_list: defineAsyncComponent(() => import("./LinksList/index.vue")),
   numbers_list: defineAsyncComponent(() => import("./NumbersList/index.vue")),
+  text: defineAsyncComponent(() => import("./Text/index.vue")),
   title_text_image: defineAsyncComponent(
     () => import("./TitleTextImage/index.vue"),
   ),

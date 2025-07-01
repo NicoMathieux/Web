@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type ConsultingDocumentDataSlicesSlice =
+  | TextSlice
   | ContactFormSlice
   | DoubleImageLinkSlice
   | TwoImagesSlice
@@ -82,6 +83,7 @@ export type ConsultingDocument<Lang extends string = string> =
   >;
 
 type ContactDocumentDataSlicesSlice =
+  | TextSlice
   | ContactFormSlice
   | DoubleImageLinkSlice
   | ImageCarouselLinkSlice
@@ -159,6 +161,7 @@ export type ContactDocument<Lang extends string = string> =
   >;
 
 type ExpeditionDocumentDataSlicesSlice =
+  | TextSlice
   | ContactFormSlice
   | ImageCarouselLinkSlice
   | DoubleImageLinkSlice
@@ -297,6 +300,7 @@ export type ExpeditionDocument<Lang extends string = string> =
   >;
 
 type ExpeditionsDocumentDataSlicesSlice =
+  | TextSlice
   | ContactFormSlice
   | ImageCarouselLinkSlice
   | DoubleImageLinkSlice
@@ -456,6 +460,7 @@ export type FooterDocument<Lang extends string = string> =
   >;
 
 type HomeDocumentDataSlicesSlice =
+  | TextSlice
   | ContactFormSlice
   | HeroSlice
   | DoubleImageLinkSlice
@@ -607,6 +612,7 @@ export type MenuDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenuDocumentData>, "menu", Lang>;
 
 type PageDocumentDataSlicesSlice =
+  | TextSlice
   | ContactFormSlice
   | DoubleImageLinkSlice
   | TitleTextImageSlice
@@ -2194,6 +2200,58 @@ export type NumbersListSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Text → Default → Primary*
+ */
+export interface TextSliceDefaultPrimary {
+  /**
+   * Titre field in *Text → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Texte field in *Text → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Text Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TextSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Text*
+ */
+type TextSliceVariation = TextSliceDefault;
+
+/**
+ * Text Shared Slice
+ *
+ * - **API ID**: `text`
+ * - **Description**: Text
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextSlice = prismic.SharedSlice<"text", TextSliceVariation>;
+
+/**
  * Item in *TitleTextImage → Avec carousel → Primary → Élément*
  */
 export interface TitleTextImageSliceWithCarouselPrimaryElementItem {
@@ -2725,6 +2783,10 @@ declare module "@prismicio/client" {
       NumbersListSliceDefaultPrimary,
       NumbersListSliceVariation,
       NumbersListSliceDefault,
+      TextSlice,
+      TextSliceDefaultPrimary,
+      TextSliceVariation,
+      TextSliceDefault,
       TitleTextImageSlice,
       TitleTextImageSliceDefaultPrimary,
       TitleTextImageSliceWithCarouselPrimaryElementItem,

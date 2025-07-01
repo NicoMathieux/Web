@@ -9,7 +9,19 @@ defineProps<{
 </template>
 
 <style>
-.rich-text p:not(:first-child) {
-    margin-top: 20px;
+.rich-text {
+
+    p:not(:first-child) {
+        margin-top: 20px;
+    }
+
+    ul, ol {
+        @apply list-disc list-inside;
+    }
+
+    a {
+        @apply underline;
+    }
+
 }
 </style>
