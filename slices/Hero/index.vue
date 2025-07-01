@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { Content } from "@prismicio/client";
+import { gsap } from "gsap";
 
 const params = getPrismicSingle("settings");
+
+const route = useRoute();
 
 defineProps(
   getSliceComponentProps<Content.HeroSlice>([
@@ -11,7 +14,7 @@ defineProps(
     "context",
   ]),
 );
- 
+
 const time = ref();
 let interval;
 
@@ -23,15 +26,31 @@ const startTimer = () => {
 
 onMounted(() => {
   startTimer();
+  window.addEventListener('scroll', scaleTitleOnScroll);
 })
 
 onUnmounted(() => {
   clearInterval(interval);
+  window.removeEventListener('scroll', scaleTitleOnScroll);
 })
 
 const { isMobile } = useDevice();
 const { enable, disable, isAudioOn } = await useAudio();
 const { hasInteracted } = useInteraction();
+
+const scaleTitleOnScroll = () => {
+      const scroll = window.scrollY
+      const maxScroll = 500
+
+      // Clamp entre 1 et 0.5
+      const scale = Math.max(1 - scroll / maxScroll, 0.5)
+
+      gsap.to('.hero-title', {
+        scale: scale,
+        duration: 0.2,
+        ease: 'power1.out',
+      })
+    }
 </script>
 
 <template>
@@ -44,7 +63,7 @@ const { hasInteracted } = useInteraction();
       <PrismicImage :field="slice.primary.background_image" class="absolute z-0 w-full h-full object-cover top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
   
       <div class="absolute w-full h-full z-[1] flex items-center justify-center">
-        <div class="font-vermin text-l lg:text-2xl text-center">{{ params.data.website_title }}</div>
+        <div class="font-vermin text-l lg:text-2xl text-center hero-title"><h1 v-if="route.fullPath === '/'">{{ params.data.website_title }}</h1><span v-else>{{ params.data.website_title }}</span></div>
       </div>
   
       <div class="absolute w-full h-full z-[2]">

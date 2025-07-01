@@ -70,14 +70,14 @@ const { isMobile } = useDevice();
     <div class="flex justify-between items-start mt-[24px]">
       <div class="w-[400px]">
         <div class="font-rader leading-[90%] text-m flex lg:block items-center justify-between">
-          {{ title }}
+          <h3>{{ title }}</h3>
           <div v-show="isMobile" class="flex gap-[16px]">
             <button @click="prevSlide"><img class="h-[48px] rotate-180" src="/assets/images/arrow.png" /></button>
             <button @click="nextSlide"><img class="h-[48px]" src="/assets/images/arrow.png" /></button>
           </div>
         </div>
         <div class="font-slussen mt-[12px]"><RichText :field="text" /></div>
-        <div class="mt-[18px]"><CustomButton :link="link" /></div>
+        <div class="mt-[18px]" v-if="link.url"><CustomButton :link="link" /></div>
       </div>
       <div v-show="!isMobile" class="flex gap-[16px]">
         <button @click="prevSlide"><img class="h-[48px] rotate-180" src="/assets/images/arrow.png" /></button>

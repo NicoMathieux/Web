@@ -27,7 +27,6 @@
 				"thumbnails": {}
 			},
 			"right_image": {
-				"__TYPE__": "ImageContent",
 				"origin": {
 					"id": "main",
 					"url": "https://images.unsplash.com/photo-1576662712957-9c79ae1280f8",
@@ -46,6 +45,8 @@
 					"background": "transparent"
 				},
 				"alt": "bark",
+				"credits": null,
+				"__TYPE__": "ImageContent",
 				"thumbnails": {}
 			}
 		},
@@ -95,7 +96,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Commodo consequat velit nulla occaecat veniam aute deserunt incididunt magna commodo labore ipsum est eiusmod. Nostrud ipsum adipisicing consectetur duis deserunt ipsum commodo."
+												"text": "Aute dolore quis dolor ullamco veniam consequat."
 											}
 										}
 									]
@@ -145,7 +146,7 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Tempor dolore eiusmod amet officia eu non qui magna quis deserunt ipsum ex. Consequat proident voluptate ullamco amet Lorem mollit."
+												"text": "Id esse enim magna."
 											}
 										}
 									]
