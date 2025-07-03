@@ -23,6 +23,7 @@ export const components = defineSliceZoneComponents({
     () => import("./ImageCarouselLink/index.vue"),
   ),
   links_list: defineAsyncComponent(() => import("./LinksList/index.vue")),
+  menu_item: defineAsyncComponent(() => import("./MenuItem/index.vue")),
   numbers_list: defineAsyncComponent(() => import("./NumbersList/index.vue")),
   text: defineAsyncComponent(() => import("./Text/index.vue")),
   title_text_image: defineAsyncComponent(

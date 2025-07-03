@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { components } from '~/slices'
 import { gsap } from "gsap";
+import { useMenuStore } from '../stores/menu';
 
 const menu = getPrismicSingle("menu");
 const params = getPrismicSingle("settings");
@@ -7,6 +9,8 @@ const params = getPrismicSingle("settings");
 const opened = ref(false);
 const linksList = ref(null);
 const linksListHeight = ref(0);
+
+const menuStore = useMenuStore();
 
 const toggleMenu = () => {
 	if (linksListHeight.value === 0) setTimeout(updateHeight, 0);
@@ -34,6 +38,7 @@ const { isMobile } = useDevice();
 watch(opened, async (isOpen) => {
 	await nextTick();
 	if (isOpen) {
+		menuStore.setHoveredID(null);
 		animateMenuOpen();
 	} else {
 		animateMenuClose();
@@ -94,6 +99,12 @@ const animateMenuClose = () => {
 			"<"
 		);
 };
+
+const route = useRoute();
+
+watch(() => route.path, () => {
+	closeMenu();
+})
 </script>
 
 <template>
@@ -149,18 +160,13 @@ const animateMenuClose = () => {
 			style="display: none"
 		>
 			<div class="flex justify-between">
-				<div
+				<SliceZone
+					wrapper="main"
 					ref="linksList"
-					class="font-rader leading-[120%] text-xl flex flex-col gap-[24px] h-full overflow-hidden"
-				>
-					<div
-						v-for="(link, i) in menu.data.links"
-						:key="i"
-						class="menu-link"
-					>
-						<PrismicLink :field="link" @click="toggleMenu" />
-					</div>
-				</div>
+					class="font-rader leading-[120%] text-xl flex flex-col items-start gap-[24px] h-full"
+					:slices="menu.data.slices ?? []"
+					:components="components"
+				/>
 				<Scratched>
 					<PrismicImage
 						v-show="!isMobile"

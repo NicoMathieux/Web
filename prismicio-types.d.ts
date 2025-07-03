@@ -534,6 +534,8 @@ interface HomeDocumentData {
 export type HomeDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<HomeDocumentData>, "home", Lang>;
 
+type MenuDocumentDataSlicesSlice = MenuItemSlice;
+
 /**
  * Content for Menu documents
  */
@@ -586,17 +588,15 @@ interface MenuDocumentData {
   image: prismic.ImageField<never>;
 
   /**
-   * Liens field in *Menu*
+   * Slice Zone field in *Menu*
    *
-   * - **Field Type**: Link
+   * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
-   * - **API ID Path**: menu.links
+   * - **API ID Path**: menu.slices[]
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  links: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
+  slices: prismic.SliceZone<MenuDocumentDataSlicesSlice>;
 }
 
 /**
@@ -2118,6 +2118,91 @@ export type LinksListSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *MenuItem → Default → Primary*
+ */
+export interface MenuItemSliceDefaultPrimary {
+  /**
+   * Lien field in *MenuItem → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menu_item.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Default variation for MenuItem Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MenuItemSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MenuItemSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *MenuItem → Avec sous-menu → Primary*
+ */
+export interface MenuItemSliceWithSubmenuPrimary {
+  /**
+   * Lien field in *MenuItem → Avec sous-menu → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menu_item.withSubmenu.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Sous-liens field in *MenuItem → Avec sous-menu → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: menu_item.withSubmenu.primary.sublinks
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  sublinks: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+}
+
+/**
+ * Avec sous-menu variation for MenuItem Slice
+ *
+ * - **API ID**: `withSubmenu`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MenuItemSliceWithSubmenu = prismic.SharedSliceVariation<
+  "withSubmenu",
+  Simplify<MenuItemSliceWithSubmenuPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *MenuItem*
+ */
+type MenuItemSliceVariation = MenuItemSliceDefault | MenuItemSliceWithSubmenu;
+
+/**
+ * MenuItem Shared Slice
+ *
+ * - **API ID**: `menu_item`
+ * - **Description**: MenuItem
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MenuItemSlice = prismic.SharedSlice<
+  "menu_item",
+  MenuItemSliceVariation
+>;
+
+/**
  * Item in *NumbersList → Default → Primary → Nombres*
  */
 export interface NumbersListSliceDefaultPrimaryNumbersItem {
@@ -2714,6 +2799,7 @@ declare module "@prismicio/client" {
       HomeDocumentDataSlicesSlice,
       MenuDocument,
       MenuDocumentData,
+      MenuDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
@@ -2778,6 +2864,12 @@ declare module "@prismicio/client" {
       LinksListSliceDefaultPrimary,
       LinksListSliceVariation,
       LinksListSliceDefault,
+      MenuItemSlice,
+      MenuItemSliceDefaultPrimary,
+      MenuItemSliceWithSubmenuPrimary,
+      MenuItemSliceVariation,
+      MenuItemSliceDefault,
+      MenuItemSliceWithSubmenu,
       NumbersListSlice,
       NumbersListSliceDefaultPrimaryNumbersItem,
       NumbersListSliceDefaultPrimary,

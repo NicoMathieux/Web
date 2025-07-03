@@ -6,7 +6,7 @@ const rem = (px: number) => (px ? `${(px / 16).toFixed(7)}rem` : "0rem");
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ["@nuxtjs/prismic", "@nuxtjs/tailwindcss", "vue3-carousel-nuxt", '@nuxtjs/device'],
+  modules: ["@nuxtjs/prismic", "@nuxtjs/tailwindcss", "vue3-carousel-nuxt", '@nuxtjs/device', '@pinia/nuxt'],
 
   mapbox: {
     accessToken: 'pk.eyJ1IjoiZXZhbm1hcnRpaW4iLCJhIjoiY21hcGZqbWl0MGZ5eTJqcXRxd244NXBmbiJ9.kMMXB_B33VtEUTD3aGUvzA'

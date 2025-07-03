@@ -41,15 +41,15 @@
           "thumbnails": []
         }
       },
-      "links": {
-        "type": "Link",
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
         "config": {
-          "label": "Liens",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": true
+          "choices": {
+            "menu_item": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     }

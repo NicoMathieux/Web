@@ -1,0 +1,63 @@
+{
+  "id": "menu_item",
+  "type": "SharedSlice",
+  "name": "MenuItem",
+  "description": "MenuItem",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Lien",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "withSubmenu",
+      "name": "Avec sous-menu",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Lien",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "sublinks": {
+          "type": "Link",
+          "config": {
+            "label": "Sous-liens",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
