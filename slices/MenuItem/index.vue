@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Content } from "@prismicio/client";
 import { useMenuStore } from "../../stores/menu";
-import { computed } from "vue";
 import gsap from "gsap";
 
 const props = defineProps(
