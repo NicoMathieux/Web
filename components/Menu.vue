@@ -110,7 +110,7 @@ watch(() => route.path, () => {
 <template>
 	<div
 		class="w-full bg-snow text-coal fixed top-0 left-0 z-10 mask-container"
-		:class="isMobile ? 'mobile' : 'desktop'"
+		:class="{ 'mobile': isMobile, 'desktop': !isMobile, 'h-full overflow-x-hidden overflow-y-scroll after:opacity-0': opened && isMobile }"
 	>
 		<div
 			class="px-[24px] pt-[18px] pb-[8px] flex justify-between items-center"
