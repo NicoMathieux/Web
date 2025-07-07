@@ -56,6 +56,15 @@
           "label": "Web3Forms clé API",
           "placeholder": ""
         }
+      },
+      "background_config": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Configuration du fond de site",
+          "placeholder": "",
+          "allowTargetBlank": false,
+          "single": "preformatted"
+        }
       }
     }
   }

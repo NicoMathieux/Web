@@ -825,6 +825,17 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   web3forms_api_key: prismic.KeyTextField;
+
+  /**
+   * Configuration du fond de site field in *Paramètres*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.background_config
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  background_config: prismic.RichTextField;
 }
 
 /**

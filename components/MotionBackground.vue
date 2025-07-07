@@ -6,8 +6,14 @@ import { Pane } from "tweakpane";
 import noiseSrc from "/assets/images/fbm-noise-pack.png"
 import { TweakpaneColor } from "../utils/tweakpane";
 
-const canvas = ref<HTMLCanvasElement | null>(null);
-const PARAMS = {
+const props = defineProps({
+  debug: Boolean
+})
+
+const params = getPrismicSingle("settings");
+
+const prismicParams = JSON.parse(params.value.data.background_config[0].text);
+const defaultParams = {
     speed: 2,
     force: 5,
     size: 0.2,
@@ -21,29 +27,34 @@ const PARAMS = {
     grainSpeed: 0,
 };
 
+const PARAMS = Object.assign({}, defaultParams, prismicParams);
+
+const canvas = ref<HTMLCanvasElement | null>(null);
+
 onMounted(() => {
-    /* const pane = new Pane();
-    const folder = pane.addFolder({
-        title: 'Options du fond',
-        expanded: false
-    });
-    folder.addBinding(PARAMS, 'speed', { label: "Vitesse", min: 0, max: 3 } );
-    folder.addBinding(PARAMS, 'force', { label: "Force", min: 0, max: 10 } );
-    folder.addBinding(PARAMS, 'size', { label: "Taille", min: 0, max: 0.6 } );
-    folder.addBinding(PARAMS, 'alpha', { label: "Opacité", min: 0, max: 2 } );
-    TweakpaneColor(folder, PARAMS, 'color1', 'color1f', { label: "Couleur 1"});
-    TweakpaneColor(folder, PARAMS, 'color2', 'color2f', { label: "Couleur 2"});
-    folder.addBlade({ view: 'separator' });
-    folder.addBinding(PARAMS, 'grainForce', { label: "Grain - Force", min: 0, max: 20 } );
-    folder.addBinding(PARAMS, 'grainSize', { label: "Grain - Taille", min: 0.01, max: 1 } );
-    folder.addBinding(PARAMS, 'grainSpeed', { label: "Grain - Vitesse", min: 0, max: 1 } );
-    folder.addBlade({ view: 'separator' });
-    folder.addButton({
-        title: 'Copier les paramètres',
-    }).on('click', () => {
-        navigator.clipboard.writeText(JSON.stringify({ ...PARAMS, uiColor: UIColor.value }));
-        alert("✅ Paramètres copiés dans le presse-papier !")
-    }); */
+    if (props.debug) {
+        const pane = new Pane();
+        const folder = pane.addFolder({
+            title: 'Options du fond'
+        });
+        folder.addBinding(PARAMS, 'speed', { label: "Vitesse", min: 0, max: 3 } );
+        folder.addBinding(PARAMS, 'force', { label: "Force", min: 0, max: 10 } );
+        folder.addBinding(PARAMS, 'size', { label: "Taille", min: 0, max: 0.6 } );
+        folder.addBinding(PARAMS, 'alpha', { label: "Opacité", min: 0, max: 2 } );
+        TweakpaneColor(folder, PARAMS, 'color1', 'color1f', { label: "Couleur 1"});
+        TweakpaneColor(folder, PARAMS, 'color2', 'color2f', { label: "Couleur 2"});
+        folder.addBlade({ view: 'separator' });
+        folder.addBinding(PARAMS, 'grainForce', { label: "Grain - Force", min: 0, max: 20 } );
+        folder.addBinding(PARAMS, 'grainSize', { label: "Grain - Taille", min: 0.01, max: 1 } );
+        folder.addBinding(PARAMS, 'grainSpeed', { label: "Grain - Vitesse", min: 0, max: 1 } );
+        folder.addBlade({ view: 'separator' });
+        folder.addButton({
+            title: 'Copier les paramètres',
+        }).on('click', () => {
+            navigator.clipboard.writeText(JSON.stringify(PARAMS));
+            alert("✅ Paramètres copiés dans le presse-papier !")
+        });
+    }
     
     initGL();
 })
