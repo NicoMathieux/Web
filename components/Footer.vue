@@ -3,6 +3,14 @@ const footer = getPrismicSingle("footer");
 const params = getPrismicSingle("settings");
 
 const { isMobile } = useDevice();
+
+const openCookiesPanel = () => {
+  if (typeof window !== 'undefined' && window.tarteaucitron && window.tarteaucitron.userInterface) {
+    window.tarteaucitron.userInterface.openPanel()
+  } else {
+    console.warn('Tarteaucitron n’est pas encore chargé')
+  }
+}
 </script>
 
 <template>
@@ -23,7 +31,7 @@ const { isMobile } = useDevice();
             <div v-for="column in footer.data.columns" class="w-full lg:w-[200px]">
                 <span class="font-rader leading-[90%] text-m ">{{ column.title }}</span>
                 <div class="font-slussen flex flex-col gap-[10px] mt-[12px] lg:mt-[24px]">
-                    <div v-for="link in column.links"><PrismicLink :field="link" /></div>
+                    <div v-for="link in column.links"><button class="uppercase" v-if="link.url === '/cookies'" @click="openCookiesPanel">Gestion des cookies</button><PrismicLink v-else :field="link" /></div>
                 </div>
             </div>
         </div>
