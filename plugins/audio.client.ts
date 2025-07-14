@@ -1,4 +1,6 @@
 export default defineNuxtPlugin(() => {
+	const { isMobile } = useDevice();
+
 	let audio: HTMLAudioElement | null = null;
 
 	let fadeInterval: NodeJS.Timeout | null = null;
@@ -96,10 +98,15 @@ export default defineNuxtPlugin(() => {
 			clearTimeout(loopTimeout);
 			loopTimeout = null;
 		}
-		fadeOut(() => {
-			audio!.pause();
-			audio!.currentTime = 0;
-		});
+		if (isMobile) {
+			audio.pause();
+			audio.currentTime = 0;
+		} else {
+			fadeOut(() => {
+				audio!.pause();
+				audio!.currentTime = 0;
+			});
+		}
 	};
 
 	const createAudio = (src: string) => {
