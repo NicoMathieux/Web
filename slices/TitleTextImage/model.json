@@ -76,6 +76,15 @@
             "placeholder_true": "true",
             "default_value": false
           }
+        },
+        "shop_related": {
+          "type": "Boolean",
+          "config": {
+            "label": "Lié à la boutique",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {}
@@ -157,6 +166,15 @@
           "type": "Boolean",
           "config": {
             "label": "Inversé",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "shop_related": {
+          "type": "Boolean",
+          "config": {
+            "label": "Lié à la boutique",
             "placeholder_false": "false",
             "placeholder_true": "true",
             "default_value": false

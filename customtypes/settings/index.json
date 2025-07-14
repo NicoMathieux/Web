@@ -13,6 +13,15 @@
           "placeholder": ""
         }
       },
+      "shop_activated": {
+        "type": "Boolean",
+        "config": {
+          "label": "Boutique activée",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
       "social_medias": {
         "type": "Group",
         "config": {

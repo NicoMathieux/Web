@@ -22,8 +22,8 @@
 							[
 								"link",
 								{
-									"__TYPE__": "LinkContent",
 									"key": "622feea1-44cd-4d4b-8210-5cd9dd8c05d4",
+									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "ExternalLink",
 										"url": "https://prismic.io",
@@ -42,6 +42,10 @@
 						]
 					}
 				]
+			},
+			"shop_related": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": []

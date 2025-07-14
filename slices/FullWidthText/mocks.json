@@ -18,6 +18,10 @@
 						}
 					}
 				]
+			},
+			"shop_related": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": []

@@ -792,6 +792,18 @@ interface SettingsDocumentData {
   website_title: prismic.KeyTextField;
 
   /**
+   * Boutique activée field in *Paramètres*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: settings.shop_activated
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_activated: prismic.BooleanField;
+
+  /**
    * Réseaux sociaux field in *Paramètres*
    *
    * - **Field Type**: Group
@@ -968,6 +980,17 @@ export interface ContactFormSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * Lié à la boutique field in *ContactForm → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: contact_form.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -1113,6 +1136,17 @@ export interface DoubleCardsSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   right: prismic.GroupField<Simplify<DoubleCardsSliceDefaultPrimaryRightItem>>;
+
+  /**
+   * Lié à la boutique field in *DoubleCards → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: double_cards.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -1484,6 +1518,17 @@ export interface DoubleImageLinkSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   inverted: prismic.BooleanField;
+
+  /**
+   * Lié à la boutique field in *TitleImageLink → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: double_image_link.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -1555,6 +1600,17 @@ export interface DoubleImageLinkSliceDoublePrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   inverted: prismic.BooleanField;
+
+  /**
+   * Lié à la boutique field in *TitleImageLink → Double → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: double_image_link.double.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -1627,6 +1683,17 @@ export interface DoubleImageLinkSliceTriplePrimary {
   right: prismic.GroupField<
     Simplify<DoubleImageLinkSliceTriplePrimaryRightItem>
   >;
+
+  /**
+   * Lié à la boutique field in *TitleImageLink → Triple → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: double_image_link.triple.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -1685,6 +1752,17 @@ export interface FullWidthButtonSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Lié à la boutique field in *FullWidthButton → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: full_width_button.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -1740,6 +1818,17 @@ export interface FullWidthTextSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text: prismic.RichTextField;
+
+  /**
+   * Lié à la boutique field in *FullWidthText → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: full_width_text.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -1874,6 +1963,17 @@ export interface ImageCarouselSliceDefaultPrimary {
   images: prismic.GroupField<
     Simplify<ImageCarouselSliceDefaultPrimaryImagesItem>
   >;
+
+  /**
+   * Lié à la boutique field in *ImageCarousel → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_carousel.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -2006,6 +2106,17 @@ export interface ImageCarouselLinkSliceDefaultPrimary {
   images: prismic.GroupField<
     Simplify<ImageCarouselLinkSliceDefaultPrimaryImagesItem>
   >;
+
+  /**
+   * Lié à la boutique field in *ImageCarouselLink → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_carousel_link.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -2096,6 +2207,17 @@ export interface LinksListSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   links: prismic.GroupField<Simplify<LinksListSliceDefaultPrimaryLinksItem>>;
+
+  /**
+   * Lié à la boutique field in *LinksList → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: links_list.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -2263,6 +2385,17 @@ export interface NumbersListSliceDefaultPrimary {
   numbers: prismic.GroupField<
     Simplify<NumbersListSliceDefaultPrimaryNumbersItem>
   >;
+
+  /**
+   * Lié à la boutique field in *NumbersList → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: numbers_list.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -2318,6 +2451,17 @@ export interface TextSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text: prismic.RichTextField;
+
+  /**
+   * Lié à la boutique field in *Text → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: text.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -2466,6 +2610,17 @@ export interface TitleTextImageSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   inverted: prismic.BooleanField;
+
+  /**
+   * Lié à la boutique field in *TitleTextImage → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: title_text_image.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -2547,6 +2702,17 @@ export interface TitleTextImageSliceWithCarouselPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   inverted: prismic.BooleanField;
+
+  /**
+   * Lié à la boutique field in *TitleTextImage → Avec carousel → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: title_text_image.withCarousel.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -2654,6 +2820,17 @@ export interface TwoImagesSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   right_image: prismic.ImageField<never>;
+
+  /**
+   * Lié à la boutique field in *TwoImages → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: two_images.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**
@@ -2692,6 +2869,17 @@ export interface TwoImagesSliceWithTextPrimary {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   right: prismic.GroupField<Simplify<TwoImagesSliceWithTextPrimaryRightItem>>;
+
+  /**
+   * Lié à la boutique field in *TwoImages → Avec texte → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: two_images.withText.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  shop_related: prismic.BooleanField;
 }
 
 /**

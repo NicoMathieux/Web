@@ -11,12 +11,15 @@ const props = defineProps(
 );
 
 const withText = ref(props.slice.variation === "withText");
+
+const { isShopOn } = useShop();
 </script>
 
 <template>
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
+    v-if="!(slice.primary.shop_related && !isShopOn)"
   >
     <div v-if="!withText" class="flex flex-col lg:grid lg:grid-cols-2 gap-[24px]">
       <CustomImage :image="slice.primary.left_image" />

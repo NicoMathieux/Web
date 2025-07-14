@@ -9,12 +9,15 @@ defineProps(
     "context",
   ]),
 );
+
+const { isShopOn } = useShop();
 </script>
 
 <template>
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
+    v-if="!(slice.primary.shop_related && !isShopOn)"
   >
   <Scratched variation="button">
     <div class="w-full bg-forest p-[30px] lg:px-[60px] lg:py-[48px] flex flex-col lg:flex-row justify-between items-center">

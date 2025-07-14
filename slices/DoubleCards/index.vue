@@ -9,12 +9,15 @@ defineProps(
     "context",
   ]),
 );
+
+const { isShopOn } = useShop();
 </script>
 
 <template>
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
+    v-if="!(slice.primary.shop_related && !isShopOn)"
   >
     <div class="flex flex-col lg:grid lg:grid-cols-2 gap-[80px] lg:gap-[24px]">
       <div class="flex flex-col gap-[24px]">

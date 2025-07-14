@@ -9,12 +9,15 @@ defineProps(
     "context",
   ])
 );
+
+const { isShopOn } = useShop();
 </script>
 
 <template>
   <section
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
+    v-if="!(slice.primary.shop_related && !isShopOn)"
   >
     <Header :title="slice.primary.title" :subtitle="slice.primary.subtitle" />
 

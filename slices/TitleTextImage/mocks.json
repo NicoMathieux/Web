@@ -69,6 +69,10 @@
 			"inverted": {
 				"__TYPE__": "BooleanContent",
 				"value": false
+			},
+			"shop_related": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": []
@@ -162,6 +166,10 @@
 			"inverted": {
 				"__TYPE__": "BooleanContent",
 				"value": false
+			},
+			"shop_related": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": [

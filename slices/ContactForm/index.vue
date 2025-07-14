@@ -88,12 +88,15 @@ const submitForm = async () => {
 };
 
 const { isMobile } = useDevice();
+
+const { isShopOn } = useShop();
 </script>
 
 <template>
 	<section
 		:data-slice-type="slice.slice_type"
 		:data-slice-variation="slice.variation"
+		v-if="!(slice.primary.shop_related && !isShopOn)"
 	>
 		<div class="grid grid-cols-3 gap-[50px]">
 			<CustomImage v-if="!isMobile" :image="slice.primary.image" />

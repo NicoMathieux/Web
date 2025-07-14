@@ -27,6 +27,15 @@
             "allowTargetBlank": false,
             "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
+        },
+        "shop_related": {
+          "type": "Boolean",
+          "config": {
+            "label": "Lié à la boutique",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {}

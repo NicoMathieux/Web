@@ -105,6 +105,8 @@ const route = useRoute();
 watch(() => route.path, () => {
 	closeMenu();
 })
+
+const { isShopOn } = useShop();
 </script>
 
 <template>
@@ -137,7 +139,7 @@ watch(() => route.path, () => {
 			<div
 				class="w-[50px] lg:w-[150px] flex gap-[12px] items-center justify-end"
 			>
-				<PrismicLink v-if="menu.data.show_cart">
+				<PrismicLink v-if="menu.data.show_cart && isShopOn">
 					<img src="/assets/images/cart.png" class="h-[22px]" />
 				</PrismicLink>
 				<PrismicLink

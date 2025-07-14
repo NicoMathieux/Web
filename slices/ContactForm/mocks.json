@@ -43,6 +43,10 @@
 				"credits": null,
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"shop_related": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": []

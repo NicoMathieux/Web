@@ -41,6 +41,15 @@
               }
             }
           }
+        },
+        "shop_related": {
+          "type": "Boolean",
+          "config": {
+            "label": "Lié à la boutique",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {}
