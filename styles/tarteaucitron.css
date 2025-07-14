@@ -1,0 +1,59 @@
+#tarteaucitronRoot #tarteaucitronAlertBig {
+  background: #fff !important;
+  @apply font-slussen;
+  padding-bottom: 20px !important;
+
+  @media (width < 1024px) {
+    &::before {
+      mask-image: url('/assets/images/masks/menu-mobile.png');
+    }
+  }
+  
+  @media (width >= 1024px) {
+    &::before {
+      mask-image: url('/assets/images/masks/menu-desktop.png');
+    }
+  }
+
+  &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 11px;
+      pointer-events: none;
+      background: white;
+      z-index: 2;
+      mask-size: 100% auto;
+      mask-position: bottom;
+      mask-repeat: no-repeat;
+      top: -10px;
+      transform: rotateZ(180deg);
+  }
+
+  #tarteaucitronDisclaimerAlert {
+    display: table;
+    text-align: center;
+    width: calc(100% - 40px);
+    margin: 0 20px 10px 20px;
+    padding: 0;
+  }
+
+  .tarteaucitronCTAButton {
+    background: #3A441E;
+    color: #fff;
+    @apply uppercase px-[12px] py-[8px];
+  }
+
+  #tarteaucitronCloseAlert {
+    display: none;
+  }
+  
+  #tarteaucitronPrivacyUrl {
+    @apply uppercase underline;
+
+    @media (width < 1024px) {
+      margin-top: 10px;
+    }
+  }
+}

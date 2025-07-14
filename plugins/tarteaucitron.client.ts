@@ -19,6 +19,7 @@ export default defineNuxtPlugin(() => {
 				readmoreLink: "/rgpd",
                 showIcon: false,
                 groupServices: false,
+                showDetailsOnClick: false,
 			});
 
             window.tarteaucitron.user.gtagUa = "G-1JX6LHVZHP";
