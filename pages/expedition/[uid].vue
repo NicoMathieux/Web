@@ -11,7 +11,7 @@ useMeta(page);
 
 <template>
   <div v-if="page && allExpeditionsPage">
-    <Breadcrumb :links="[[allExpeditionsPage.data.meta_title, allExpeditionsPage.url], [page.data.meta_title, page.url]]" />
+    <Breadcrumb :links="[[allExpeditionsPage.data.meta_title, allExpeditionsPage.url], [page.data.title, page.url]]" />
     <div
       class="flex items-end justify-between border-b border-snow/50 pb-[12px] mb-[24px]"
     >
