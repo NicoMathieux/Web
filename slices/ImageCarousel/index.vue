@@ -40,6 +40,7 @@ const { isShopOn } = useShop();
     <Carousel
       ref="carousel"
       :wrap-around="true"
+      :items-to-show="1.4"
       @slide-end="slideEnded"
     >
       <Slide
@@ -62,9 +63,29 @@ const { isShopOn } = useShop();
 </template>
 
 <style scoped>
-.custom-image {
-  width: 100%;
+.carousel {
+  width: 100vw;
 
-  @apply h-[400px] lg:h-[650px];
+  @apply -translate-x-[18px] lg:-translate-x-[60px];
+
+  .carousel__slide {
+    @apply transition-all;
+  }
+
+  .carousel__slide--visible:not(.carousel__slide--active) {
+    @apply grayscale-[100%] opacity-50;
+
+    .custom-image {
+      width: 60vw;
+      height: calc(60vw * 9 / 16);
+    }
+  }
+}
+
+.custom-image {
+  @apply transition-all;
+
+  width: 80vw;
+  height: calc(80vw * 9 / 16);
 }
 </style>
