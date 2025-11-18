@@ -21,10 +21,21 @@ defineProps(
 </template>
 
 <style>
-.youtube-video > iframe {
-  width: 100vw;
-  height: calc(100vw * 9 / 16);
+.youtube-video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  @apply -translate-x-[18px] lg:-translate-x-[60px];
+  & > iframe {
+    @media (width < 1024px) {
+      width: 100vw;
+      height: calc(100vw * 9 / 16);
+    }
+
+    @media (width >= 1024px) {
+      width: 80vw;
+      height: calc(80vw * 9 / 16);
+    }
+  }
 }
 </style>
