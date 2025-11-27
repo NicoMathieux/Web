@@ -24,7 +24,7 @@ const openCookiesPanel = () => {
             <div v-if="footer.data.show_social_medias" class="h-[24px] flex gap-[12px] w-full lg:w-[200px]">
                 <div v-for="social_media in params.data.social_medias" class="h-full">
                     <PrismicLink :field="social_media.link">
-                        <PrismicImage :field="social_media.logo" class="h-full" />
+                        <PrismicImage :field="social_media.logo" class="h-full w-auto object-contain" />
                     </PrismicLink>
                 </div>
             </div>
