@@ -28,7 +28,7 @@ const openCookiesPanel = () => {
                     </PrismicLink>
                 </div>
             </div>
-            <div v-for="column in footer.data.columns" class="w-full lg:w-[200px]">
+            <div v-for="column in footer.data.columns" class="w-full lg:w-[230px]">
                 <span class="font-rader leading-[90%] text-m ">{{ column.title }}</span>
                 <div class="font-slussen flex flex-col gap-[10px] mt-[12px] lg:mt-[24px]">
                     <div v-for="link in column.links"><button class="uppercase" v-if="link.url === '/cookies'" @click="openCookiesPanel">Gestion des cookies</button><PrismicLink v-else :field="link" /></div>
