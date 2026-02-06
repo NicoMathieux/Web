@@ -190,7 +190,7 @@ const { isShopOn } = useShop();
 					<PrismicLink :field="social_media.link">
 						<PrismicImage
 							:field="social_media.logo"
-							class="h-full"
+							class="h-full w-auto"
 						/>
 					</PrismicLink>
 				</div>
