@@ -50,12 +50,17 @@ const { isShopOn } = useShop();
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
     v-if="!(slice.primary.shop_related && !isShopOn)"
+    :class="{
+      'single-image': slice.primary.images.length <= 1
+    }"
   >
     <Header :title="slice.primary.title" :subtitle="slice.primary.subtitle" />
 
     <Carousel
       ref="carousel"
       :wrap-around="true"
+      :mouse-drag="slice.primary.images.length > 1"
+      :touch-drag="slice.primary.images.length > 1"
       @slide-end="slideEnded"
     >
       <Slide
@@ -82,7 +87,7 @@ const { isShopOn } = useShop();
         <div class="font-slussen mt-[12px]"><RichText :field="text" /></div>
         <div class="mt-[18px]" v-if="link.url"><CustomButton :link="link" /></div>
       </div>
-      <div v-show="!isMobile" class="flex gap-[16px]">
+      <div v-show="!isMobile && (slice.primary.images.length > 1)" class="flex gap-[16px]">
         <button @click="prevSlide"><img class="h-[48px] rotate-180" src="/assets/images/arrow.png" /></button>
         <button @click="nextSlide"><img class="h-[48px]" src="/assets/images/arrow.png" /></button>
       </div>
@@ -95,5 +100,9 @@ const { isShopOn } = useShop();
   @apply h-[250px] lg:h-[650px];
   
   width: 100%;
+}
+
+.single-image .carousel .carousel__slide--visible:not(.carousel__slide--active) {
+  @apply opacity-0;
 }
 </style>

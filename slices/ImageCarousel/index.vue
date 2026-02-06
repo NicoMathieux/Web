@@ -36,11 +36,16 @@ const { isShopOn } = useShop();
     :data-slice-variation="slice.variation"
     v-if="!(slice.primary.shop_related && !isShopOn)"
     class="relative"
+    :class="{
+      'single-image': slice.primary.images.length <= 1
+    }"
   >
     <Carousel
       ref="carousel"
       :wrap-around="true"
       :items-to-show="1.4"
+      :mouse-drag="slice.primary.images.length > 1"
+      :touch-drag="slice.primary.images.length > 1"
       @slide-end="slideEnded"
     >
       <Slide
@@ -55,7 +60,7 @@ const { isShopOn } = useShop();
       </Slide>
     </Carousel>
 
-    <div class="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-[24px] z-[1] pointer-events-none">
+    <div class="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-[24px] z-[1] pointer-events-none" v-show="slice.primary.images.length > 1">
       <button @click="prevSlide" class="pointer-events-auto"><img class="h-[48px] rotate-180" src="/assets/images/arrow.png" /></button>
       <button @click="nextSlide" class="pointer-events-auto"><img class="h-[48px]" src="/assets/images/arrow.png" /></button>
     </div>
@@ -80,6 +85,10 @@ const { isShopOn } = useShop();
       height: calc(60vw * 9 / 16);
     }
   }
+}
+
+.single-image .carousel .carousel__slide--visible:not(.carousel__slide--active) {
+  @apply opacity-0;
 }
 
 .custom-image {
