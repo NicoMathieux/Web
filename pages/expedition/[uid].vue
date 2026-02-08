@@ -21,7 +21,7 @@ useMeta(page);
         <div class="w-[11px] h-[11px] bg-snow rounded-full"></div>
       </div>
     </div>
-    <Map :place="page.data.place" :date="page.data.date" :gpx="page.data.gpx_file.url" />
+    <Map :place="page.data.place" :date="page.data.date" :gpx="page.data.gpx_file.url" :gpxColor="page.data.gpx_color" />
     <SliceZone
       wrapper="main"
       class=" flex flex-col gap-[96px] lg:gap-[132px] mt-[66px]"

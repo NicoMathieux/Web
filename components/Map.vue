@@ -7,6 +7,7 @@ const props = defineProps<{
 	place: String;
 	date: String;
 	gpx: String;
+	gpxColor: String;
 }>();
 
 let mapLoaded = false, imagesLoaded = false;
@@ -191,7 +192,7 @@ const addGeojson = () => {
 			"line-round-limit": 0
 		},
 		paint: {
-			"line-color": "#FFF",
+			"line-color": props.gpxColor || "#FFF",
 			"line-width": 5
 		},
 	});

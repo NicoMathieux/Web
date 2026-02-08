@@ -42,6 +42,13 @@
           "allowText": false
         }
       },
+      "gpx_color": {
+        "type": "Color",
+        "config": {
+          "label": "Couleur trace GPX",
+          "placeholder": ""
+        }
+      },
       "youtube_link": {
         "type": "Link",
         "config": {
