@@ -12,9 +12,9 @@ defineProps<{
         :class="{ 'mb-[24px]': !withoutMarginBottom }"
 	>
 		<div class="font-vermin text-s"><h2>{{ title }}</h2></div>
-		<div class="flex gap-[4px] items-center">
-			<span class="font-slussen">{{ subtitle }}</span>
-			<div class="w-[11px] h-[11px] bg-snow rounded-full"></div>
+		<div class="flex gap-[6px] items-center">
+			<span class="font-slussen text-right">{{ subtitle }}</span>
+			<div class="w-[11px] h-[11px] bg-snow rounded-full mb-[4px]"></div>
 		</div>
 	</div>
 </template>

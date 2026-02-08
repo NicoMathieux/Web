@@ -11,6 +11,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "day_by_day": {
+              "type": "SharedSlice"
+            },
             "text": {
               "type": "SharedSlice"
             },

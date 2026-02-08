@@ -5,6 +5,7 @@ import { defineSliceZoneComponents } from "@prismicio/vue";
 
 export const components = defineSliceZoneComponents({
   contact_form: defineAsyncComponent(() => import("./ContactForm/index.vue")),
+  day_by_day: defineAsyncComponent(() => import("./DayByDay/index.vue")),
   double_cards: defineAsyncComponent(() => import("./DoubleCards/index.vue")),
   double_image_link: defineAsyncComponent(
     () => import("./TitleImageLink/index.vue"),

@@ -16,8 +16,8 @@ useMeta(page);
       class="flex items-end justify-between border-b border-snow/50 pb-[12px] mb-[24px]"
     >
       <div class="font-rader leading-[90%] text-xl">{{ page.data.title }}</div>
-      <div class="flex gap-[4px] items-center">
-        <span class="font-slussen">{{ letterDate(page.data.date) }}</span>
+      <div class="flex gap-[6px] items-center">
+        <span class="font-slussen text-right">{{ letterDate(page.data.date) }}</span>
         <div class="w-[11px] h-[11px] bg-snow rounded-full"></div>
       </div>
     </div>

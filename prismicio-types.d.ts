@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type ConsultingDocumentDataSlicesSlice =
+  | DayByDaySlice
   | TextSlice
   | ContactFormSlice
   | DoubleImageLinkSlice
@@ -148,6 +149,7 @@ export type ConsultingDocument<Lang extends string = string> =
   >;
 
 type ContactDocumentDataSlicesSlice =
+  | DayByDaySlice
   | TextSlice
   | ContactFormSlice
   | DoubleImageLinkSlice
@@ -226,6 +228,7 @@ export type ContactDocument<Lang extends string = string> =
   >;
 
 type ExpeditionDocumentDataSlicesSlice =
+  | DayByDaySlice
   | TextSlice
   | ContactFormSlice
   | ImageCarouselLinkSlice
@@ -376,6 +379,7 @@ export type ExpeditionDocument<Lang extends string = string> =
   >;
 
 type ExpeditionsDocumentDataSlicesSlice =
+  | DayByDaySlice
   | TextSlice
   | ContactFormSlice
   | ImageCarouselLinkSlice
@@ -536,6 +540,7 @@ export type FooterDocument<Lang extends string = string> =
   >;
 
 type HomeDocumentDataSlicesSlice =
+  | DayByDaySlice
   | TextSlice
   | ContactFormSlice
   | HeroSlice
@@ -688,6 +693,7 @@ export type MenuDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenuDocumentData>, "menu", Lang>;
 
 type PageDocumentDataSlicesSlice =
+  | DayByDaySlice
   | TextSlice
   | ContactFormSlice
   | DoubleImageLinkSlice
@@ -1097,6 +1103,128 @@ type ContactFormSliceVariation = ContactFormSliceDefault;
 export type ContactFormSlice = prismic.SharedSlice<
   "contact_form",
   ContactFormSliceVariation
+>;
+
+/**
+ * Item in *DayByDay → Default → Primary → Jours*
+ */
+export interface DayByDaySliceDefaultPrimaryDaysItem {
+  /**
+   * Titre field in *DayByDay → Default → Primary → Jours*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: day_by_day.default.primary.days[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Texte field in *DayByDay → Default → Primary → Jours*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: day_by_day.default.primary.days[].text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+
+  /**
+   * Image field in *DayByDay → Default → Primary → Jours*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: day_by_day.default.primary.days[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Inversé field in *DayByDay → Default → Primary → Jours*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: day_by_day.default.primary.days[].reverse
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  reverse: prismic.BooleanField;
+}
+
+/**
+ * Primary content in *DayByDay → Default → Primary*
+ */
+export interface DayByDaySliceDefaultPrimary {
+  /**
+   * Titre field in *DayByDay → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: day_by_day.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Sous-titre field in *DayByDay → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: day_by_day.default.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Jours field in *DayByDay → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: day_by_day.default.primary.days[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  days: prismic.GroupField<Simplify<DayByDaySliceDefaultPrimaryDaysItem>>;
+
+  /**
+   * Lié à la boutique field in *DayByDay → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: day_by_day.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  shop_related: prismic.BooleanField;
+}
+
+/**
+ * Default variation for DayByDay Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type DayByDaySliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<DayByDaySliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *DayByDay*
+ */
+type DayByDaySliceVariation = DayByDaySliceDefault;
+
+/**
+ * DayByDay Shared Slice
+ *
+ * - **API ID**: `day_by_day`
+ * - **Description**: DayByDay
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type DayByDaySlice = prismic.SharedSlice<
+  "day_by_day",
+  DayByDaySliceVariation
 >;
 
 /**
@@ -3093,6 +3221,11 @@ declare module "@prismicio/client" {
       ContactFormSliceDefaultPrimary,
       ContactFormSliceVariation,
       ContactFormSliceDefault,
+      DayByDaySlice,
+      DayByDaySliceDefaultPrimaryDaysItem,
+      DayByDaySliceDefaultPrimary,
+      DayByDaySliceVariation,
+      DayByDaySliceDefault,
       DoubleCardsSlice,
       DoubleCardsSliceDefaultPrimaryLeftItem,
       DoubleCardsSliceDefaultPrimaryRightItem,
