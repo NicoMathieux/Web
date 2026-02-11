@@ -1,0 +1,58 @@
+{
+  "id": "map_gpx",
+  "type": "SharedSlice",
+  "name": "MapGpx",
+  "description": "MapGpx",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "date": {
+          "type": "Date",
+          "config": {
+            "label": "Date",
+            "placeholder": ""
+          }
+        },
+        "place": {
+          "type": "Text",
+          "config": {
+            "label": "Lieu",
+            "placeholder": ""
+          }
+        },
+        "gpx_file": {
+          "type": "Link",
+          "config": {
+            "label": "Trace GPX",
+            "placeholder": "",
+            "select": "media",
+            "allowText": false
+          }
+        },
+        "gpx_color": {
+          "type": "Color",
+          "config": {
+            "label": "Couleur trace GPX",
+            "placeholder": ""
+          }
+        },
+        "shop_related": {
+          "type": "Boolean",
+          "config": {
+            "label": "Lié à la boutique",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

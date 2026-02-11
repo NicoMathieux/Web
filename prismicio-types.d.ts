@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type ConsultingDocumentDataSlicesSlice =
+  | MapGpxSlice
   | DayByDaySlice
   | TextSlice
   | ContactFormSlice
@@ -149,6 +150,7 @@ export type ConsultingDocument<Lang extends string = string> =
   >;
 
 type ContactDocumentDataSlicesSlice =
+  | MapGpxSlice
   | DayByDaySlice
   | TextSlice
   | ContactFormSlice
@@ -228,6 +230,7 @@ export type ContactDocument<Lang extends string = string> =
   >;
 
 type ExpeditionDocumentDataSlicesSlice =
+  | MapGpxSlice
   | DayByDaySlice
   | TextSlice
   | ContactFormSlice
@@ -379,6 +382,7 @@ export type ExpeditionDocument<Lang extends string = string> =
   >;
 
 type ExpeditionsDocumentDataSlicesSlice =
+  | MapGpxSlice
   | DayByDaySlice
   | TextSlice
   | ContactFormSlice
@@ -540,6 +544,7 @@ export type FooterDocument<Lang extends string = string> =
   >;
 
 type HomeDocumentDataSlicesSlice =
+  | MapGpxSlice
   | DayByDaySlice
   | TextSlice
   | ContactFormSlice
@@ -693,6 +698,7 @@ export type MenuDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenuDocumentData>, "menu", Lang>;
 
 type PageDocumentDataSlicesSlice =
+  | MapGpxSlice
   | DayByDaySlice
   | TextSlice
   | ContactFormSlice
@@ -2455,6 +2461,89 @@ export type LinksListSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *MapGpx → Default → Primary*
+ */
+export interface MapGpxSliceDefaultPrimary {
+  /**
+   * Date field in *MapGpx → Default → Primary*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: map_gpx.default.primary.date
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  date: prismic.DateField;
+
+  /**
+   * Lieu field in *MapGpx → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: map_gpx.default.primary.place
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  place: prismic.KeyTextField;
+
+  /**
+   * Trace GPX field in *MapGpx → Default → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: map_gpx.default.primary.gpx_file
+   * - **Documentation**: https://prismic.io/docs/fields/link-to-media
+   */
+  gpx_file: prismic.LinkToMediaField<prismic.FieldState, never>;
+
+  /**
+   * Couleur trace GPX field in *MapGpx → Default → Primary*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: map_gpx.default.primary.gpx_color
+   * - **Documentation**: https://prismic.io/docs/fields/color
+   */
+  gpx_color: prismic.ColorField;
+
+  /**
+   * Lié à la boutique field in *MapGpx → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: map_gpx.default.primary.shop_related
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  shop_related: prismic.BooleanField;
+}
+
+/**
+ * Default variation for MapGpx Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MapGpxSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MapGpxSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *MapGpx*
+ */
+type MapGpxSliceVariation = MapGpxSliceDefault;
+
+/**
+ * MapGpx Shared Slice
+ *
+ * - **API ID**: `map_gpx`
+ * - **Description**: MapGpx
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MapGpxSlice = prismic.SharedSlice<"map_gpx", MapGpxSliceVariation>;
+
+/**
  * Primary content in *MenuItem → Default → Primary*
  */
 export interface MenuItemSliceDefaultPrimary {
@@ -3272,6 +3361,10 @@ declare module "@prismicio/client" {
       LinksListSliceDefaultPrimary,
       LinksListSliceVariation,
       LinksListSliceDefault,
+      MapGpxSlice,
+      MapGpxSliceDefaultPrimary,
+      MapGpxSliceVariation,
+      MapGpxSliceDefault,
       MenuItemSlice,
       MenuItemSliceDefaultPrimary,
       MenuItemSliceWithSubmenuPrimary,

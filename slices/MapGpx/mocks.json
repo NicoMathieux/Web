@@ -1,0 +1,40 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"gpx_file": {
+				"key": "55580860-3451-4235-b339-32e392aa1c2f",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "FileLink",
+					"id": "mock_Media_link",
+					"kind": "file",
+					"name": "mock_name",
+					"url": "https://source.unsplash.com/daily",
+					"size": "0"
+				}
+			},
+			"gpx_color": {
+				"__TYPE__": "FieldContent",
+				"value": "#00ad2b",
+				"type": "Color"
+			},
+			"place": {
+				"__TYPE__": "FieldContent",
+				"value": "identity",
+				"type": "Text"
+			},
+			"date": {
+				"__TYPE__": "FieldContent",
+				"type": "Date",
+				"value": "2026-01-07"
+			},
+			"shop_related": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			}
+		},
+		"items": []
+	}
+]

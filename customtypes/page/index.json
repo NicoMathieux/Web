@@ -17,6 +17,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "map_gpx": {
+              "type": "SharedSlice"
+            },
             "day_by_day": {
               "type": "SharedSlice"
             },
