@@ -99,7 +99,7 @@ const { isShopOn } = useShop();
 		v-if="!(slice.primary.shop_related && !isShopOn)"
 	>
 		<div class="grid grid-cols-3 gap-[50px]">
-			<CustomImage v-if="!isMobile" :image="slice.primary.image" />
+			<CustomImage v-if="!isMobile && slice.primary.image.url" :image="slice.primary.image" />
 
 			<form
 				id="form"
@@ -145,7 +145,8 @@ const { isShopOn } = useShop();
 						>Type de demande</label
 					>
 					<select required name="category" id="category" v-model="form.category">
-						<option disabled selected value>Sélectionne...</option>
+						<option disabled selected value>Sélectionner...</option>
+						<option v-if="slice.primary.categories.length == 0" value="Autre">Autre</option>
 						<option
 							v-for="item in slice.primary.categories"
 							:value="item.category"

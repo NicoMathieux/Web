@@ -46,7 +46,7 @@ const { isShopOn } = useShop();
         <div v-if="slice.primary.link.url" class="mt-[18px]"><CustomButton :link="slice.primary.link" /></div>
       </div>
 
-      <CustomImage v-if="slice.primary.image && !withCarousel" :image="slice.primary.image" :date="slice.primary.image_date" :place="slice.primary.image_place" class="col-span-2 relative" :class="slice.primary.inverted ? 'order-first' : 'col-end-6'" />
+      <CustomImage v-if="slice.primary.image.url && !withCarousel" :image="slice.primary.image" :date="slice.primary.image_date" :place="slice.primary.image_place" class="col-span-2 relative" :class="slice.primary.inverted ? 'order-first' : 'col-end-6'" />
 
       <div v-else-if="withCarousel" class="col-span-2 relative" :class="slice.primary.inverted ? 'order-first' : 'col-end-6'">
         <Carousel
