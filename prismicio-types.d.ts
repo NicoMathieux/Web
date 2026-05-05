@@ -1964,6 +1964,17 @@ export interface FullWidthButtonSliceDefaultPrimary {
   link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
+   * Afficher bouton field in *FullWidthButton → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: full_width_button.default.primary.show_button
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  show_button: prismic.BooleanField;
+
+  /**
    * Lié à la boutique field in *FullWidthButton → Default → Primary*
    *
    * - **Field Type**: Boolean
@@ -2075,6 +2086,16 @@ export type FullWidthTextSlice = prismic.SharedSlice<
  * Primary content in *Hero → Default → Primary*
  */
 export interface HeroSliceDefaultPrimary {
+  /**
+   * Titre field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
   /**
    * Image de fond field in *Hero → Default → Primary*
    *

@@ -30,6 +30,15 @@
             "repeat": false
           }
         },
+        "show_button": {
+          "type": "Boolean",
+          "config": {
+            "label": "Afficher bouton",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
         "shop_related": {
           "type": "Boolean",
           "config": {

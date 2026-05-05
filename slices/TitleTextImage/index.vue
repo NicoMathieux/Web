@@ -46,9 +46,11 @@ const { isShopOn } = useShop();
         <div v-if="slice.primary.link.url" class="mt-[18px]"><CustomButton :link="slice.primary.link" /></div>
       </div>
 
-      <CustomImage v-if="slice.primary.image.url && !withCarousel" :image="slice.primary.image" :date="slice.primary.image_date" :place="slice.primary.image_place" class="col-span-2 relative" :class="slice.primary.inverted ? 'order-first' : 'col-end-6'" />
+      <CustomImage v-if="!withCarousel && slice.primary.image.url" :image="slice.primary.image" :date="slice.primary.image_date" :place="slice.primary.image_place" class="col-span-2 relative" :class="slice.primary.inverted ? 'order-first' : 'col-end-6'" />
 
-      <div v-else-if="withCarousel" class="col-span-2 relative" :class="slice.primary.inverted ? 'order-first' : 'col-end-6'">
+      <CustomImage v-if="withCarousel && slice.primary.element.length == 1 && slice.primary.element[0].image.url" :image="slice.primary.element[0].image" :date="slice.primary.element[0].date" :place="slice.primary.element[0].place" class="col-span-2 relative" :class="slice.primary.inverted ? 'order-first' : 'col-end-6'" />
+
+      <div v-else-if="withCarousel && slice.primary.element.length > 1" class="col-span-2 relative" :class="slice.primary.inverted ? 'order-first' : 'col-end-6'">
         <Carousel
           ref="carousel"
           :wrap-around="true"
@@ -59,6 +61,7 @@ const { isShopOn } = useShop();
             :key="image.title"
           >
             <CustomImage
+              v-if="image.image.url"
               :image="image.image"
               :date="image.date"
               :place="image.place"

@@ -20,6 +20,10 @@
 			"shop_related": {
 				"__TYPE__": "BooleanContent",
 				"value": false
+			},
+			"show_button": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": []

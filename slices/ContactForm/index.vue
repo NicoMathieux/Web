@@ -98,13 +98,16 @@ const { isShopOn } = useShop();
 		:data-slice-variation="slice.variation"
 		v-if="!(slice.primary.shop_related && !isShopOn)"
 	>
-		<div class="grid grid-cols-3 gap-[50px]">
+		<div :class="slice.primary.image.url || isMobile ? 'grid grid-cols-3 gap-[50px]' : 'flex justify-center'">
 			<CustomImage v-if="!isMobile && slice.primary.image.url" :image="slice.primary.image" />
 
 			<form
 				id="form"
 				@submit.prevent="submitForm"
-				class="col-span-3 lg:col-span-2 grid grid-cols-3 gap-[30px] lg:gap-[45px]"
+				:class="[
+					'grid grid-cols-3 gap-[30px] lg:gap-[45px]',
+					slice.primary.image.url || isMobile ? 'col-span-3 lg:col-span-2' : 'w-full lg:w-2/3 mx-auto'
+				]"
 			>
 				<div class="flex flex-col col-span-3 lg:col-span-1">
 					<label
@@ -117,7 +120,7 @@ const { isShopOn } = useShop();
 						name="name"
 						id="name"
 						v-model="form.name"
-						placeholder="Nicolas Mathieux"
+						placeholder="Nom"
 						required
 					/>
 				</div>
@@ -133,7 +136,7 @@ const { isShopOn } = useShop();
 						name="email"
 						id="email"
 						v-model="form.email"
-						placeholder="marketing@nicomathieux.com"
+						placeholder="Adresse mail"
 						required
 					/>
 				</div>
@@ -167,7 +170,7 @@ const { isShopOn } = useShop();
 						name="subject"
 						id="subject"
 						v-model="form.subject"
-						placeholder="Projet d'expédition sur la Lune"
+						placeholder="Objet"
 						required
 					/>
 				</div>

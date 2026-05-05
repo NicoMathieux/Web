@@ -23,7 +23,7 @@ const { isShopOn } = useShop();
 
     <div id="container" class="flex justify-between" :class="(slice.primary.inverted && slice.variation === 'double') ? 'flex-col-reverse lg:flex-row-reverse' : 'flex-col lg:flex-row'">
       <!-- Variation default -->
-      <div v-if="slice.primary.image.url" class="flex gap-[24px] flex-col" :class="slice.primary.inverted ? 'flex-col-reverse lg:flex-row-reverse' : 'lg:flex-row'">
+      <div v-if="slice.variation === 'default' && slice.primary.image.url" class="flex gap-[24px] flex-col" :class="slice.primary.inverted ? 'flex-col-reverse lg:flex-row-reverse' : 'lg:flex-row'">
         <CustomImage :image="slice.primary.image" class="w-2/3" />
         <div>
           <div class="font-rader leading-[90%] text-m"><h3>{{ slice.primary.image_title }}</h3></div>

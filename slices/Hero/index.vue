@@ -63,7 +63,7 @@ const scaleTitleOnScroll = () => {
       <PrismicImage :field="slice.primary.background_image" class="absolute z-0 w-full h-full object-cover top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
   
       <div class="absolute w-full h-full z-[1] flex items-center justify-center">
-        <div class="font-vermin text-l lg:text-2xl text-center hero-title"><h1 v-if="route.fullPath === '/'">{{ params.data.website_title }}</h1><span v-else>{{ params.data.website_title }}</span></div>
+        <div class="font-vermin text-l lg:text-2xl text-center hero-title"><h1 class="leading-[110%]" v-if="route.fullPath === '/'">{{ slice.primary.title || params.data.website_title }}</h1><span class="leading-[110%]" v-else>{{ slice.primary.title || params.data.website_title }}</span></div>
       </div>
   
       <div class="absolute w-full h-full z-[2]">

@@ -10,7 +10,7 @@ const props = defineProps<{
 	gpxColor: String;
 }>();
 
-let mapLoaded = false, imagesLoaded = false;
+let mapLoaded = false, imagesLoaded = false, gpxParsed = false, allLoaded = false;
 
 let shownGeoJson = {
 	type: "FeatureCollection",
@@ -130,11 +130,15 @@ const processGPX = async () => {
 			},
 		],
 	};
+
+	gpxParsed = true;
+	onLoaded();
 }
 
 // Starting point for every functions on mapRef like addSource, addLayer, getSource, ...
 const onLoaded = () => {
-	if (!mapLoaded || !imagesLoaded) return;
+	if (!mapLoaded || !imagesLoaded || !gpxParsed || allLoaded) return;
+	allLoaded = true;
 
 	fitBounds();
 	

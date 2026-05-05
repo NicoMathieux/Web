@@ -28,6 +28,6 @@ useMeta(page);
       :slices="page.data.slices ?? []"
       :components="components"
     />
-    <FixedButton :link="page.data.youtube_link">Youtube</FixedButton>
+    <FixedButton v-if="page.data.youtube_link.url" :link="page.data.youtube_link">Youtube</FixedButton>
   </div>
 </template>
