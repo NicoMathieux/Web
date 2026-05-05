@@ -1,0 +1,1 @@
+.rich-text p:not(:first-child){margin-top:20px}.rich-text ol,.rich-text ul{list-style-position:inside;list-style-type:disc}.rich-text a{text-decoration-line:underline}

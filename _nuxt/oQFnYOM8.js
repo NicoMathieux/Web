@@ -1,0 +1,1 @@
+import{B as e,C as a}from"./hHm4GdSz.js";const m=t=>{e({title:a(()=>t.value?.data?.meta_title||""),ogTitle:a(()=>t.value?.data?.meta_title||""),description:a(()=>t.value?.data?.meta_description||""),ogDescription:a(()=>t.value?.data?.meta_description||""),ogImage:a(()=>t.value?.data?.meta_image?.url||""),twitterCard:"summary_large_image"})};export{m as u};
