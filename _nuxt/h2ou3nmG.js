@@ -1,0 +1,1 @@
+import{f as t,e as i,p as n,a9 as s}from"./C3jJMgsM.js";const p=t({__name:"RichText",props:{field:{}},setup(e){return(a,o)=>{const c=s;return i(),n(c,{field:e.field,wrapper:"div",class:"rich-text"},null,8,["field"])}}});export{p as _};
